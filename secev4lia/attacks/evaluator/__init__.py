@@ -1,0 +1,105 @@
+# Copyright 2026 - AI4I. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+"""
+Evaluator module for SecEv4LIA attack framework.
+
+This package contains all reusable evaluation components for determining
+attack success across different techniques. It centralizes evaluation
+logic that was previously scattered across ``shared/`` and individual
+technique folders.
+
+Architecture:
+    base.py               — BaseJudgeEvaluator ABC + AssertionResult
+    judge_evaluators.py   — NuancedEvaluator, JailbreakBenchEvaluator, HarmBenchEvaluator
+    pattern_evaluators.py — PatternEvaluator, KeywordEvaluator, LengthEvaluator
+    metrics.py            — Success rate, per-goal metrics, summary reports
+    sync.py               — Server sync utilities (PATCH Result records)
+
+Usage:
+    from secev4lia.attacks.evaluator import (
+        # LLM-based judge evaluators
+        BaseJudgeEvaluator,
+        NuancedEvaluator,
+        JailbreakBenchEvaluator,
+        HarmBenchEvaluator,
+        HarmBenchVariantEvaluator,
+        EVALUATOR_MAP,
+        AssertionResult,
+        # Pattern-based evaluators
+        PatternEvaluator,
+        KeywordEvaluator,
+        LengthEvaluator,
+        # Metrics
+        calculate_success_rate,
+        calculate_per_goal_metrics,
+        generate_summary_report,
+        calculate_confidence_score,
+        calculate_majority_vote_asr,
+        calculate_fleiss_kappa,
+        calculate_per_judge_strictness,
+        # Server sync
+        sync_evaluation_to_server,
+        update_single_result,
+    )
+"""
+
+from secev4lia.attacks.evaluator.base import AssertionResult, BaseJudgeEvaluator
+from secev4lia.attacks.evaluator.evaluation_step import BaseEvaluationStep
+from secev4lia.attacks.evaluator.judge_evaluators import (
+    EVALUATOR_MAP,
+    HarmBenchEvaluator,
+    HarmBenchVariantEvaluator,
+    JailbreakBenchEvaluator,
+    NuancedEvaluator,
+    OnTopicEvaluator,
+)
+from secev4lia.attacks.evaluator.metrics import (
+    calculate_confidence_score,
+    calculate_per_goal_metrics,
+    calculate_success_rate,
+    generate_summary_report,
+    group_by_goal,
+    calculate_majority_vote_asr,
+    calculate_fleiss_kappa,
+    calculate_per_judge_strictness,
+)
+from secev4lia.attacks.evaluator.pattern_evaluators import (
+    KeywordEvaluator,
+    LengthEvaluator,
+    PatternEvaluator,
+)
+from secev4lia.attacks.evaluator.sync import (
+    sync_evaluation_to_server,
+    update_single_result,
+)
+
+__all__ = [
+    # Base
+    "AssertionResult",
+    "BaseJudgeEvaluator",
+    "BaseEvaluationStep",
+    # Judge evaluators
+    "NuancedEvaluator",
+    "JailbreakBenchEvaluator",
+    "HarmBenchEvaluator",
+    "HarmBenchVariantEvaluator",
+    "OnTopicEvaluator",
+    "EVALUATOR_MAP",
+    # Pattern evaluators
+    "PatternEvaluator",
+    "KeywordEvaluator",
+    "LengthEvaluator",
+    # Metrics
+    "calculate_success_rate",
+    "calculate_confidence_score",
+    "calculate_per_goal_metrics",
+    "generate_summary_report",
+    "group_by_goal",
+    "calculate_majority_vote_asr",
+    "calculate_fleiss_kappa",
+    "calculate_per_judge_strictness",
+    # Sync
+    "sync_evaluation_to_server",
+    "update_single_result",
+]

@@ -1,0 +1,114 @@
+# Copyright 2026 - AI4I. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+"""
+Attack technique registry.
+
+This module registers all available attack techniques as concrete orchestrators
+using a factory function to eliminate boilerplate code.
+
+The factory dynamically creates orchestrator classes that configure:
+- attack_type: String identifier for the attack
+- attack_impl_class: BaseAttack subclass implementing the algorithm
+
+To add a new attack:
+1. Implement BaseAttack subclass in techniques/your_attack/
+2. Register here using create_orchestrator()
+3. Add to ATTACK_REGISTRY dict
+"""
+
+from typing import Callable, Optional, Type
+
+from secev4lia.attacks.orchestrator import AttackOrchestrator
+from secev4lia.attacks.techniques.advprefix import AdvPrefixAttack
+from secev4lia.attacks.techniques.base import BaseAttack
+from secev4lia.attacks.techniques.pair import PAIRAttack
+from secev4lia.attacks.techniques.baseline import BaselineAttack
+from secev4lia.attacks.techniques.flipattack import FlipAttack
+from secev4lia.attacks.techniques.tap import (
+    TAPAttack,
+)  # Placeholder for future implementation
+from secev4lia.attacks.techniques.autodan_turbo import AutoDANTurboAttack
+from secev4lia.attacks.techniques.bon import BoNAttack
+from secev4lia.attacks.techniques.cipherchat import CipherChatAttack
+from secev4lia.attacks.techniques.h4rm3l import H4rm3lAttack
+from secev4lia.attacks.techniques.pap import PAPAttack
+
+
+def create_orchestrator(
+    attack_name: str,
+    attack_impl_class: Type[BaseAttack],
+    custom_setup: Optional[Callable] = None,
+) -> Type[AttackOrchestrator]:
+    """
+    Factory function to create orchestrator classes dynamically.
+
+    This eliminates repetitive class definitions while maintaining clean
+    architecture separation between orchestration and attack algorithms.
+
+    Args:
+        attack_name: Attack identifier (e.g., "AdvPrefix")
+        attack_impl_class: BaseAttack subclass implementing the technique
+        custom_setup: Optional method for specialized kwargs preparation
+            Signature: (self, attack_config, run_config_override) -> Dict[str, Any]
+
+    Returns:
+        Orchestrator class configured for this attack technique
+
+    Example:
+        >>> MyOrchestrator = create_orchestrator("MyAttack", MyAttackClass)
+        >>> orchestrator = MyOrchestrator(secev4lia_agent)
+        >>> results = orchestrator.execute(attack_config)
+    """
+    class_attrs = {
+        "attack_type": attack_name,
+        "attack_impl_class": attack_impl_class,
+        "__doc__": f"{attack_name}: {attack_impl_class.__doc__ or 'Attack technique orchestrator'}",
+    }
+
+    # Add custom method if provided
+    if custom_setup:
+        class_attrs["_get_attack_impl_kwargs"] = custom_setup
+
+    return type(f"{attack_name}Orchestrator", (AttackOrchestrator,), class_attrs)
+
+
+# Create orchestrators using factory (1 line per attack)
+AdvPrefixOrchestrator = create_orchestrator("AdvPrefix", AdvPrefixAttack)
+BaselineOrchestrator = create_orchestrator("Baseline", BaselineAttack)
+PAIROrchestrator = create_orchestrator("PAIR", PAIRAttack)
+FlipAttackOrchestrator = create_orchestrator("FlipAttack", FlipAttack)
+TAPOrchestrator = create_orchestrator("TAP", TAPAttack)
+AutoDANTurboOrchestrator = create_orchestrator("AutoDANTurbo", AutoDANTurboAttack)
+BoNOrchestrator = create_orchestrator("bon", BoNAttack)
+H4rm3lOrchestrator = create_orchestrator("h4rm3l", H4rm3lAttack)
+CipherChatOrchestrator = create_orchestrator("cipherchat", CipherChatAttack)
+PAPOrchestrator = create_orchestrator("pap", PAPAttack)
+
+# Registry of all available attacks
+ATTACK_REGISTRY = {
+    "AdvPrefix": AdvPrefixOrchestrator,
+    "Baseline": BaselineOrchestrator,
+    "PAIR": PAIROrchestrator,
+    "FlipAttack": FlipAttackOrchestrator,
+    "TAP": TAPOrchestrator,
+    "AutoDANTurbo": AutoDANTurboOrchestrator,
+    "bon": BoNOrchestrator,
+    "h4rm3l": H4rm3lOrchestrator,
+    "cipherchat": CipherChatOrchestrator,
+    "pap": PAPOrchestrator,
+}
+
+__all__ = [
+    "AdvPrefixOrchestrator",
+    "BaselineOrchestrator",
+    "PAIROrchestrator",
+    "FlipAttackOrchestrator",
+    "TAPOrchestrator",
+    "AutoDANTurboOrchestrator",
+    "BoNOrchestrator",
+    "H4rm3lOrchestrator",
+    "CipherChatOrchestrator",
+    "PAPOrchestrator",
+    "ATTACK_REGISTRY",
+]

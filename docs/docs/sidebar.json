@@ -1,0 +1,496 @@
+{
+  "items": [
+    {
+      "items": [
+        {
+          "items": [
+            {
+              "items": [
+                "reference/secev4lia/attacks/evaluator/base",
+                "reference/secev4lia/attacks/evaluator/evaluation_step",
+                "reference/secev4lia/attacks/evaluator/judge_evaluators",
+                "reference/secev4lia/attacks/evaluator/metrics",
+                "reference/secev4lia/attacks/evaluator/pattern_evaluators",
+                "reference/secev4lia/attacks/evaluator/sync"
+              ],
+              "label": "secev4lia.attacks.evaluator",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/attacks/generator/templates"
+              ],
+              "label": "secev4lia.attacks.generator",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/attacks/objectives/base"
+              ],
+              "label": "secev4lia.attacks.objectives",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/attacks/shared/progress",
+                "reference/secev4lia/attacks/shared/prompt_parser",
+                "reference/secev4lia/attacks/shared/response_utils",
+                "reference/secev4lia/attacks/shared/router_factory",
+                "reference/secev4lia/attacks/shared/tui",
+                "reference/secev4lia/attacks/shared/utils"
+              ],
+              "label": "secev4lia.attacks.shared",
+              "type": "category"
+            },
+            {
+              "items": [
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/advprefix/attack",
+                    "reference/secev4lia/attacks/techniques/advprefix/completions",
+                    "reference/secev4lia/attacks/techniques/advprefix/config",
+                    "reference/secev4lia/attacks/techniques/advprefix/evaluation",
+                    "reference/secev4lia/attacks/techniques/advprefix/generate",
+                    "reference/secev4lia/attacks/techniques/advprefix/utils"
+                  ],
+                  "label": "secev4lia.attacks.techniques.advprefix",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/attack",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/config",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/core",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/dashboard_tracing",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/evaluation",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/lifelong",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/log_styles",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/strategy_library",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/summarizer",
+                    "reference/secev4lia/attacks/techniques/autodan_turbo/warm_up"
+                  ],
+                  "label": "secev4lia.attacks.techniques.autodan_turbo",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/baseline/attack",
+                    "reference/secev4lia/attacks/techniques/baseline/config",
+                    "reference/secev4lia/attacks/techniques/baseline/evaluation",
+                    "reference/secev4lia/attacks/techniques/baseline/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.baseline",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/bon/attack",
+                    "reference/secev4lia/attacks/techniques/bon/config",
+                    "reference/secev4lia/attacks/techniques/bon/evaluation",
+                    "reference/secev4lia/attacks/techniques/bon/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.bon",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/cipherchat/attack",
+                    "reference/secev4lia/attacks/techniques/cipherchat/config",
+                    "reference/secev4lia/attacks/techniques/cipherchat/evaluation",
+                    "reference/secev4lia/attacks/techniques/cipherchat/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.cipherchat",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/flipattack/attack",
+                    "reference/secev4lia/attacks/techniques/flipattack/config",
+                    "reference/secev4lia/attacks/techniques/flipattack/evaluation",
+                    "reference/secev4lia/attacks/techniques/flipattack/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.flipattack",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/h4rm3l/attack",
+                    "reference/secev4lia/attacks/techniques/h4rm3l/config",
+                    "reference/secev4lia/attacks/techniques/h4rm3l/decorators",
+                    "reference/secev4lia/attacks/techniques/h4rm3l/evaluation",
+                    "reference/secev4lia/attacks/techniques/h4rm3l/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.h4rm3l",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/pair/attack",
+                    "reference/secev4lia/attacks/techniques/pair/config",
+                    "reference/secev4lia/attacks/techniques/pair/evaluation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.pair",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/pap/attack",
+                    "reference/secev4lia/attacks/techniques/pap/config",
+                    "reference/secev4lia/attacks/techniques/pap/evaluation",
+                    "reference/secev4lia/attacks/techniques/pap/generation",
+                    "reference/secev4lia/attacks/techniques/pap/taxonomy"
+                  ],
+                  "label": "secev4lia.attacks.techniques.pap",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/attacks/techniques/tap/attack",
+                    "reference/secev4lia/attacks/techniques/tap/config",
+                    "reference/secev4lia/attacks/techniques/tap/evaluation",
+                    "reference/secev4lia/attacks/techniques/tap/generation"
+                  ],
+                  "label": "secev4lia.attacks.techniques.tap",
+                  "type": "category"
+                },
+                "reference/secev4lia/attacks/techniques/base",
+                "reference/secev4lia/attacks/techniques/config"
+              ],
+              "label": "secev4lia.attacks.techniques",
+              "type": "category"
+            },
+            "reference/secev4lia/attacks/base",
+            "reference/secev4lia/attacks/orchestrator",
+            "reference/secev4lia/attacks/registry"
+          ],
+          "label": "secev4lia.attacks",
+          "type": "category"
+        },
+        {
+          "items": [
+            {
+              "items": [
+                "reference/secev4lia/datasets/providers/file",
+                "reference/secev4lia/datasets/providers/huggingface"
+              ],
+              "label": "secev4lia.datasets.providers",
+              "type": "category"
+            },
+            "reference/secev4lia/datasets/base",
+            "reference/secev4lia/datasets/presets",
+            "reference/secev4lia/datasets/registry"
+          ],
+          "label": "secev4lia.datasets",
+          "type": "category"
+        },
+        {
+          "items": [
+            {
+              "items": [
+                "reference/secev4lia/risks/craft_adversarial_data/types",
+                "reference/secev4lia/risks/craft_adversarial_data/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.craft_adversarial_data",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/credential_exposure/types",
+                "reference/secev4lia/risks/credential_exposure/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.credential_exposure",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/excessive_agency/types",
+                "reference/secev4lia/risks/excessive_agency/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.excessive_agency",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/input_manipulation_attack/types",
+                "reference/secev4lia/risks/input_manipulation_attack/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.input_manipulation_attack",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/jailbreak/types",
+                "reference/secev4lia/risks/jailbreak/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.jailbreak",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/malicious_tool_invocation/types",
+                "reference/secev4lia/risks/malicious_tool_invocation/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.malicious_tool_invocation",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/misinformation/types",
+                "reference/secev4lia/risks/misinformation/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.misinformation",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/model_evasion/types",
+                "reference/secev4lia/risks/model_evasion/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.model_evasion",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/prompt_injection/templates",
+                "reference/secev4lia/risks/prompt_injection/types",
+                "reference/secev4lia/risks/prompt_injection/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.prompt_injection",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/public_facing_application_exploitation/types",
+                "reference/secev4lia/risks/public_facing_application_exploitation/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.public_facing_application_exploitation",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/sensitive_information_disclosure/types",
+                "reference/secev4lia/risks/sensitive_information_disclosure/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.sensitive_information_disclosure",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/system_prompt_leakage/types",
+                "reference/secev4lia/risks/system_prompt_leakage/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.system_prompt_leakage",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/risks/vector_embedding_weaknesses_exploit/types",
+                "reference/secev4lia/risks/vector_embedding_weaknesses_exploit/vulnerabilities"
+              ],
+              "label": "secev4lia.risks.vector_embedding_weaknesses_exploit",
+              "type": "category"
+            },
+            "reference/secev4lia/risks/base",
+            "reference/secev4lia/risks/profile_helpers",
+            "reference/secev4lia/risks/profile_types",
+            "reference/secev4lia/risks/registry",
+            "reference/secev4lia/risks/utils"
+          ],
+          "label": "secev4lia.risks",
+          "type": "category"
+        },
+        {
+          "items": [
+            {
+              "items": [
+                "reference/secev4lia/router/adapters/__init__",
+                "reference/secev4lia/router/adapters/base",
+                "reference/secev4lia/router/adapters/google_adk",
+                "reference/secev4lia/router/adapters/litellm",
+                "reference/secev4lia/router/adapters/ollama",
+                "reference/secev4lia/router/adapters/openai"
+              ],
+              "label": "secev4lia.router.adapters",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/router/tracking/category_classifier",
+                "reference/secev4lia/router/tracking/context",
+                "reference/secev4lia/router/tracking/coordinator",
+                "reference/secev4lia/router/tracking/decorators",
+                "reference/secev4lia/router/tracking/step",
+                "reference/secev4lia/router/tracking/tracker",
+                "reference/secev4lia/router/tracking/utils"
+              ],
+              "label": "secev4lia.router.tracking",
+              "type": "category"
+            },
+            "reference/secev4lia/router/router",
+            "reference/secev4lia/router/types"
+          ],
+          "label": "secev4lia.router",
+          "type": "category"
+        },
+        {
+          "items": [
+            {
+              "items": [
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/agent/agent_create",
+                    "reference/secev4lia/server/api/agent/agent_destroy",
+                    "reference/secev4lia/server/api/agent/agent_list",
+                    "reference/secev4lia/server/api/agent/agent_partial_update",
+                    "reference/secev4lia/server/api/agent/agent_retrieve",
+                    "reference/secev4lia/server/api/agent/agent_update"
+                  ],
+                  "label": "secev4lia.server.api.agent",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/apilogs/apilogs_list",
+                    "reference/secev4lia/server/api/apilogs/apilogs_retrieve",
+                    "reference/secev4lia/server/api/apilogs/apilogs_summary_retrieve"
+                  ],
+                  "label": "secev4lia.server.api.apilogs",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/attack/attack_create",
+                    "reference/secev4lia/server/api/attack/attack_destroy",
+                    "reference/secev4lia/server/api/attack/attack_list",
+                    "reference/secev4lia/server/api/attack/attack_partial_update",
+                    "reference/secev4lia/server/api/attack/attack_retrieve",
+                    "reference/secev4lia/server/api/attack/attack_update"
+                  ],
+                  "label": "secev4lia.server.api.attack",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/checkout/checkout_create"
+                  ],
+                  "label": "secev4lia.server.api.checkout",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/generate/v1_chat_completions_create"
+                  ],
+                  "label": "secev4lia.server.api.generate",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/judge/judge_create"
+                  ],
+                  "label": "secev4lia.server.api.judge",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/key/key_context_retrieve",
+                    "reference/secev4lia/server/api/key/key_create",
+                    "reference/secev4lia/server/api/key/key_destroy",
+                    "reference/secev4lia/server/api/key/key_list",
+                    "reference/secev4lia/server/api/key/key_retrieve"
+                  ],
+                  "label": "secev4lia.server.api.key",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/organization/organization_create",
+                    "reference/secev4lia/server/api/organization/organization_destroy",
+                    "reference/secev4lia/server/api/organization/organization_list",
+                    "reference/secev4lia/server/api/organization/organization_me_retrieve",
+                    "reference/secev4lia/server/api/organization/organization_partial_update",
+                    "reference/secev4lia/server/api/organization/organization_retrieve",
+                    "reference/secev4lia/server/api/organization/organization_update"
+                  ],
+                  "label": "secev4lia.server.api.organization",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/result/result_create",
+                    "reference/secev4lia/server/api/result/result_destroy",
+                    "reference/secev4lia/server/api/result/result_list",
+                    "reference/secev4lia/server/api/result/result_partial_update",
+                    "reference/secev4lia/server/api/result/result_retrieve",
+                    "reference/secev4lia/server/api/result/result_trace_create",
+                    "reference/secev4lia/server/api/result/result_update"
+                  ],
+                  "label": "secev4lia.server.api.result",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/run/run_create",
+                    "reference/secev4lia/server/api/run/run_destroy",
+                    "reference/secev4lia/server/api/run/run_list",
+                    "reference/secev4lia/server/api/run/run_partial_update",
+                    "reference/secev4lia/server/api/run/run_result_create",
+                    "reference/secev4lia/server/api/run/run_retrieve",
+                    "reference/secev4lia/server/api/run/run_run_tests_create",
+                    "reference/secev4lia/server/api/run/run_update"
+                  ],
+                  "label": "secev4lia.server.api.run",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/scripts/generate"
+                  ],
+                  "label": "secev4lia.server.api.scripts",
+                  "type": "category"
+                },
+                {
+                  "items": [
+                    "reference/secev4lia/server/api/user/user_create",
+                    "reference/secev4lia/server/api/user/user_destroy",
+                    "reference/secev4lia/server/api/user/user_list",
+                    "reference/secev4lia/server/api/user/user_me_retrieve",
+                    "reference/secev4lia/server/api/user/user_me_update",
+                    "reference/secev4lia/server/api/user/user_partial_update",
+                    "reference/secev4lia/server/api/user/user_retrieve",
+                    "reference/secev4lia/server/api/user/user_update"
+                  ],
+                  "label": "secev4lia.server.api.user",
+                  "type": "category"
+                },
+                "reference/secev4lia/server/api/models"
+              ],
+              "label": "secev4lia.server.api",
+              "type": "category"
+            },
+            {
+              "items": [
+                "reference/secev4lia/server/storage/base",
+                "reference/secev4lia/server/storage/local",
+                "reference/secev4lia/server/storage/remote"
+              ],
+              "label": "secev4lia.server.storage",
+              "type": "category"
+            },
+            "reference/secev4lia/server/client",
+            "reference/secev4lia/server/types"
+          ],
+          "label": "secev4lia.server",
+          "type": "category"
+        },
+        "reference/secev4lia/agent",
+        "reference/secev4lia/errors",
+        "reference/secev4lia/logger",
+        "reference/secev4lia/utils"
+      ],
+      "label": "secev4lia",
+      "type": "category"
+    }
+  ],
+  "label": "\ud83d\udd17 API Reference",
+  "type": "category"
+}

@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.8.3
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+        additional_dependencies: [cz-conventional-gitmoji==0.7.0]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.9
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: uv run pytest --run-integration --ignore=tests/e2e/attacks
+        language: system
+        pass_filenames: false
+        files: ^(.*\.py|pyproject\.toml|poetry\.lock|.*requirements.*\.txt|.*package\.json|.*package-lock\.json)$

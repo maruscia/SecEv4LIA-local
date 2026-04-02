@@ -1,0 +1,52 @@
+name: Build Documentation
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - 'secev4lia/**'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'docs/package-lock.json'
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Install Python dependencies
+        run: uv sync --group docs
+
+      - name: Install Node.js dependencies
+        run: |
+          cd docs
+          npm ci
+
+      - name: Generate API documentation
+        run: uv run python docs/scripts/generate_docs.py --current
+
+      - name: Build documentation
+        run: |
+          cd docs
+          npm run build 

@@ -1,0 +1,262 @@
+# Copyright 2026 - AI4I. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+from secev4lia.logger import get_logger
+from typing import TYPE_CHECKING, Any, Dict, Optional, Union
+
+from secev4lia import utils
+from secev4lia.errors import SecEv4LIAError
+from secev4lia.router import AgentRouter
+from secev4lia.router.types import AgentTypeEnum
+from secev4lia.server.storage.base import StorageBackend
+
+# Lazy import for attack orchestrators to avoid ~0.5s startup delay
+if TYPE_CHECKING:
+    pass
+
+logger = get_logger(__name__)
+
+
+def _resolve_target_config(target_config: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    """Return normalized victim request defaults for the configured router."""
+    from secev4lia.attacks.techniques.config import default_target
+
+    resolved = default_target()
+    if not target_config:
+        return resolved
+
+    merged = {key: value for key, value in target_config.items() if value is not None}
+    if "request_timeout" in merged and "timeout" not in merged:
+        merged["timeout"] = merged.pop("request_timeout")
+
+    resolved.update(merged)
+    return resolved
+
+
+class SecEv4LIA:
+    """
+    The primary client for orchestrating security assessments with SecEv4LIA.
+
+    This class serves as the main entry point to the SecEv4LIA library, providing
+    a high-level interface for:
+    - Configuring victim agents that will be assessed.
+    - Defining and selecting attack strategies.
+    - Executing automated security tests against the configured agents.
+    - Retrieving and handling test results.
+
+    It encapsulates complexities such as agent registration
+    with the local backend (via `AgentRouter`), and the dynamic dispatch of various
+    attack methodologies.
+
+    Attributes:
+        router: An `AgentRouter` instance managing the agent's representation
+            in the SecEv4LIA backend.
+        attack_strategies: A dictionary mapping strategy names to their
+            `AttackStrategy` implementations.
+    """
+
+    def __init__(
+        self,
+        endpoint: str,
+        name: Optional[str] = None,
+        agent_type: Union[AgentTypeEnum, str] = AgentTypeEnum.UNKNOWN,
+        raise_on_unexpected_status: bool = False,
+        timeout: Optional[float] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+        target_config: Optional[Dict[str, Any]] = None,
+        adapter_operational_config: Optional[Dict[str, Any]] = None,
+    ):
+        """
+        Initializes the SecEv4LIA client and prepares it for interaction.
+
+        This constructor sets up the local storage backend, loads default
+        prompts, resolves the agent type, and initializes the agent router
+        to ensure the agent is known to the backend. It also prepares available
+        attack strategies.
+
+        Args:
+            endpoint: The target application's endpoint URL. This is the primary
+                interface that the configured agent will interact with or represent
+                during security tests.
+            name: An optional descriptive name for the agent being configured.
+                If not provided, a default name might be assigned or behavior might
+                depend on the specific backend agent management policies.
+            agent_type: Specifies the type of the agent. This can be provided
+                as an `AgentTypeEnum` member (e.g., `AgentTypeEnum.GOOGLE_ADK`) or
+                as a string identifier (e.g., "google-adk", "litellm").
+                String values are automatically converted to the corresponding
+                `AgentTypeEnum` member. Defaults to `AgentTypeEnum.UNKNOWN` if
+                not specified or if an invalid string is provided.
+            raise_on_unexpected_status: If set to `True`, the API client will
+                raise an exception for any HTTP status codes that are not typically
+                expected for a successful operation. Defaults to `False`.
+            timeout: The timeout duration in seconds for API requests made by the
+                authenticated client. Defaults to `None` (which might mean a
+                default timeout from the underlying HTTP library is used).
+            metadata: Optional dictionary containing agent-specific metadata.
+            target_config: Optional default request settings for the configured
+                victim model. This is the preferred place to define target-side
+                generation defaults such as `max_tokens`, `temperature`,
+                and `timeout`.
+            adapter_operational_config: Optional configuration for the agent adapter.
+        """
+
+        from secev4lia.server.storage.local import LocalBackend
+
+        self.backend: StorageBackend = LocalBackend()
+        logger.info(
+            "SecEv4LIA using local backend → ~/.local/share/secev4lia/secev4lia.db"
+        )
+
+        self.client = None
+
+        processed_agent_type = utils.resolve_agent_type(agent_type)
+        self.target_config = _resolve_target_config(target_config)
+        explicit_target_config = (
+            {
+                key: value
+                for key, value in (target_config or {}).items()
+                if value is not None
+            }
+            if target_config
+            else {}
+        )
+
+        router_metadata = {
+            key: value
+            for key, value in {**(metadata or {}), **explicit_target_config}.items()
+            if value is not None
+        }
+        router_operational_config = {
+            **self.target_config,
+            **(adapter_operational_config or {}),
+        }
+
+        self.router = AgentRouter(
+            backend=self.backend,
+            name=name or endpoint,  # fall back to endpoint if no name provided
+            agent_type=processed_agent_type,
+            endpoint=endpoint,
+            metadata=router_metadata,
+            adapter_operational_config=router_operational_config,
+        )
+
+        # Attack strategies are lazy-loaded to improve startup time
+        self._attack_strategies: Optional[Dict[str, Any]] = None
+
+    @property
+    def attack_strategies(self) -> Dict[str, Any]:
+        """Lazy-loaded attack strategies dictionary."""
+        if self._attack_strategies is None:
+            # Import here to avoid circular imports and improve startup time
+            from secev4lia.attacks.registry import (
+                AdvPrefixOrchestrator,
+                AutoDANTurboOrchestrator,
+                BaselineOrchestrator,
+                BoNOrchestrator,
+                CipherChatOrchestrator,
+                H4rm3lOrchestrator,
+                PAPOrchestrator,
+                PAIROrchestrator,
+                FlipAttackOrchestrator,
+                TAPOrchestrator,
+            )
+
+            self._attack_strategies = {
+                "advprefix": AdvPrefixOrchestrator(secev4lia_agent=self),
+                "autodan_turbo": AutoDANTurboOrchestrator(secev4lia_agent=self),
+                "baseline": BaselineOrchestrator(secev4lia_agent=self),
+                "bon": BoNOrchestrator(secev4lia_agent=self),
+                "cipherchat": CipherChatOrchestrator(secev4lia_agent=self),
+                "pair": PAIROrchestrator(secev4lia_agent=self),
+                "flipattack": FlipAttackOrchestrator(secev4lia_agent=self),
+                "tap": TAPOrchestrator(secev4lia_agent=self),
+                "h4rm3l": H4rm3lOrchestrator(secev4lia_agent=self),
+                "pap": PAPOrchestrator(secev4lia_agent=self),
+            }
+        return self._attack_strategies
+
+    def hack(
+        self,
+        attack_config: Dict[str, Any],
+        run_config_override: Optional[Dict[str, Any]] = None,
+        fail_on_run_error: bool = True,
+        _tui_app: Optional[Any] = None,
+        _tui_log_callback: Optional[Any] = None,
+    ) -> Any:
+        """
+        Executes a specified attack strategy against the configured victim agent.
+
+        This method serves as the primary action command for initiating an attack.
+        It identifies the appropriate attack strategy based on `attack_config`,
+        ensures the victim agent (managed by `self.router`) is ready, and then
+        delegates the execution to the chosen strategy.
+
+        Args:
+            attack_config: A dictionary containing parameters specific to the
+                chosen attack type. Must include an 'attack_type' key that maps
+                to a registered strategy (e.g., "advprefix"). Other keys provide
+                configuration for that strategy (e.g., 'category', 'prompt_text').
+            run_config_override: An optional dictionary that can override default
+                run configurations. The specifics depend on the attack strategy
+                and backend capabilities.
+            fail_on_run_error: If `True` (the default), an exception will be
+                raised if the attack run encounters an error and fails. If `False`,
+                errors might be suppressed or handled differently by the strategy.
+
+        Returns:
+            The result returned by the `execute` method of the chosen attack
+            strategy. The nature of this result is strategy-dependent.
+
+        Raises:
+            ValueError: If the 'attack_type' is missing from `attack_config` or
+                if the specified 'attack_type' is not a supported/registered
+                strategy.
+            SecEv4LIAError: For issues during backend
+                agent operations, or other unexpected errors during the attack process.
+        """
+        try:
+            attack_type = attack_config.get("attack_type")
+            if not attack_type:
+                raise ValueError("'attack_type' must be provided in attack_config.")
+
+            strategy = self.attack_strategies.get(attack_type)
+            if not strategy:
+                supported_types = list(self.attack_strategies.keys())
+                raise ValueError(
+                    f"Unsupported attack_type: {attack_type}. Supported types: {supported_types}."
+                )
+
+            backend_agent = self.router.backend_agent
+
+            logger.info(
+                f"Preparing to attack agent '{backend_agent.name}' "
+                f"(ID: {backend_agent.id}, Type: {backend_agent.agent_type}) "
+                f"configured in this SecEv4LIA instance, using strategy '{attack_type}'."
+            )
+
+            return strategy.execute(
+                attack_config=attack_config,
+                run_config_override=run_config_override,
+                fail_on_run_error=fail_on_run_error,
+                _tui_app=_tui_app,
+                _tui_log_callback=_tui_log_callback,
+            )
+
+        except SecEv4LIAError:
+            raise
+        except ValueError as ve:
+            logger.error(f"Configuration error in SecEv4LIA.hack: {ve}", exc_info=True)
+            raise SecEv4LIAError(f"Configuration error: {ve}") from ve
+        except RuntimeError as re:
+            logger.error(f"Runtime error during SecEv4LIA.hack: {re}", exc_info=True)
+            if "Failed to create backend agent" in str(
+                re
+            ) or "Failed to update metadata" in str(re):
+                raise SecEv4LIAError(f"Backend agent operation failed: {re}") from re
+            raise SecEv4LIAError(f"An unexpected runtime error occurred: {re}") from re
+        except Exception as e:
+            logger.error(f"Unexpected error in SecEv4LIA.hack: {e}", exc_info=True)
+            raise SecEv4LIAError(
+                f"An unexpected error occurred during attack: {e}"
+            ) from e
