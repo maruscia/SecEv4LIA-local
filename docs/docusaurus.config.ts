@@ -10,9 +10,9 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://aisecuritylab.github.io',
+  url: 'https://animated-guide-g46k62k.pages.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  baseUrl: '/SecEv4LIA/',
+  baseUrl: '/',
   trailingSlash: false,
 
   // GitHub pages deployment config.
