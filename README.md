@@ -35,16 +35,19 @@ It provides a structured approach to discover potential vulnerabilities, includi
 ## 🚀 Installation
 
 
-### Installation from PyPI
+### Installation
 
-SecEv4LIA can be installed directly from PyPI:
+SecEv4LIA can be installed from PyPI or directly from GitHub:
 
 ```bash
 # With uv (recommended)
 uv add secev4lia
 
-# Or with pip
+# With pip (PyPI)
 pip install secev4lia
+
+# With pip (GitHub, latest)
+pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
 
 ## 📚 Quick Start
