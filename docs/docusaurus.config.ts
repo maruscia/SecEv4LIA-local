@@ -10,17 +10,14 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'http://localhost',
+  url: 'https://aisecuritylab.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For local development, use '/' to serve at root
-  // For production, you can change this to '/docs/' if needed
-  baseUrl: '/',
+  baseUrl: '/SecEv4LIA/',
   trailingSlash: false,
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
   organizationName: 'AISecurityLab', // Usually your GitHub org/user name.
-  projectName: 'secev4lia', // Usually your repo name.
+  projectName: 'SecEv4LIA', // Must match the GitHub repo name exactly (case-sensitive).
 
   onBrokenLinks: 'throw',
 

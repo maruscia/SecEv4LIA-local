@@ -1,15 +1,29 @@
-name: Build Documentation
+name: Deploy Documentation
 
 on:
   push:
+    branches: ["main"]
+    paths:
+      - 'docs/**'
+      - 'secev4lia/**'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches: ["main"]
     paths:
       - 'docs/**'
       - 'secev4lia/**'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 
+# Prevent concurrent deploys; let an in-progress run finish before starting another.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -49,4 +63,23 @@ jobs:
       - name: Build documentation
         run: |
           cd docs
-          npm run build 
+          npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    # Only deploy on pushes to main and manual triggers — not on PRs
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
