@@ -40,40 +40,21 @@ It provides a structured approach to discover potential vulnerabilities, includi
 SecEv4LIA can be installed from PyPI or directly from GitHub:
 
 ```bash
-# With uv (recommended)
-uv add secev4lia
-
-# With pip (PyPI)
-pip install secev4lia
-
-# With pip (GitHub, latest)
 pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
+```
+Activate the environment
+```bash
+source .venv/bin/activate
 ```
 
 ## 📚 Quick Start
 
+### TUI
+
 Run the interactive CLI to start testing your AI agents:
 
 ```bash
-secev4lia
-```
-
-Or use the SDK:
-
-```python
-from secev4lia import SecEv4LIA, AgentTypeEnum
-
-agent = SecEv4LIA(
-    name="my_agent",
-    endpoint="http://localhost:8000",
-    agent_type=AgentTypeEnum.GOOGLE_ADK
-)
-
-results = agent.hack(attack_config={
-    "attack_type": "advprefix",
-    "goals": ["Test goal"],
-    # ... generator and judges config
-})
+secev examples ollama
 ```
 
 ## 📊 Reporting
