@@ -101,6 +101,7 @@ def pytest_collection_modifyitems(config, items):
     """Skip integration tests unless explicitly requested."""
     # Check if we should run integration tests
     run_integration = config.getoption("--run-integration", default=False)
+    run_google_adk = config.getoption("--run-google-adk", default=False)
 
     if not run_integration:
         skip_integration = pytest.mark.skip(
@@ -109,6 +110,16 @@ def pytest_collection_modifyitems(config, items):
         for item in items:
             if "integration" in item.keywords:
                 item.add_marker(skip_integration)
+        return
+
+    # Google ADK tests can spawn an example server subprocess; keep them opt-in.
+    if not run_google_adk:
+        skip_google_adk = pytest.mark.skip(
+            reason="Google ADK tests skipped. Use --run-google-adk to run."
+        )
+        for item in items:
+            if "google_adk" in item.keywords:
+                item.add_marker(skip_google_adk)
 
 
 # NOTE: pytest_addoption has been moved to tests/conftest.py (root level)
