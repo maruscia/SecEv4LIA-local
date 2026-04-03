@@ -54,19 +54,21 @@ def web(ctx, host, port, db_path, no_browser):
       secev web --no-browser       # skip opening a browser tab
     """
     try:
-        from flask import Flask  # noqa: F401
-    except ImportError:
+        from secev4lia.server.dashboard import create_app
+    except ImportError as exc:
         console.print(
-            "[bold red]❌ Flask is required for the web dashboard.[/bold red]"
+            "[bold red]❌ Missing dependencies required for the web dashboard.[/bold red]"
         )
-        console.print("\n[cyan]Install with:[/cyan]")
-        console.print("  pip install 'secev4lia[web]'")
-        console.print("  # or")
-        console.print("  pip install flask")
+        console.print("\n[cyan]Install/upgrade with:[/cyan]")
+        console.print("  pip install -U secev4lia")
+        console.print("  # or from GitHub")
+        console.print(
+            "  pip install -U git+https://github.com/AISecurityLab/SecEv4LIA.git"
+        )
+        console.print(f"\n[dim]Import error: {exc}[/dim]")
         ctx.exit(1)
         return
 
-    from secev4lia.server.dashboard import create_app
     from secev4lia.server.storage.local import LocalBackend
 
     backend = LocalBackend(db_path=db_path)
