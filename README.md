@@ -20,19 +20,14 @@
 SecEv4LIA is an open-source toolkit designed to help security researchers, developers and AI safety practitioners evaluate the security of AI agents. 
 It provides a structured approach to discover potential vulnerabilities, including prompt injection, jailbreaking techniques, and other attack vectors.
 
-## 🔥 Features
-
-- **Comprehensive Attack Library**: Pre-built techniques for prompt injections, jailbreaks, and goal hijacking
-- **Modular Framework**: Easily extend with custom attack vectors and testing methodologies
-- **Safety Focused**: Responsible disclosure guidelines and ethical usage recommendations
-
 ### 🔌 AI Agent Frameworks Supported
 
 [![LiteLLM](https://img.shields.io/badge/LiteLLM-blue?style=flat&logo=github)](https://github.com/BerriAI/litellm)
 [![ADK](https://img.shields.io/badge/Google-ADK-green?style=flat&logo=openai)](https://google.github.io/adk-docs/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-SDK-412991?style=flat&logo=openai)](https://platform.openai.com/docs)
+[![Ollama](https://img.shields.io/badge/Ollama-black?style=flat&logo=ollama)](https://ollama.com)
 
-## 🚀 Installation
+## 🚀 Quick Start
 
 
 ### Installation
@@ -47,7 +42,7 @@ Activate the environment
 source .venv/bin/activate
 ```
 
-## 📚 Quick Start
+## 📚 Example
 
 ### TUI
 
