@@ -49,8 +49,8 @@ DEFAULT_PREFIX_GENERATION_CONFIG: Dict[str, Any] = {
     "output_dir": DEFAULT_OUTPUT_DIR,
     # --- Model Configurations ---
     "generator": {
-        "identifier": "secev4lia-generator",
-        "endpoint": "https://api.secev4lia.dev/v1",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
         "system_prompt": DEFAULT_ADVPREFIX_GENERATOR_SYSTEM_PROMPT,
         "max_tokens": 50,
         "guided_topk": 50,
@@ -58,8 +58,8 @@ DEFAULT_PREFIX_GENERATION_CONFIG: Dict[str, Any] = {
     },
     "judges": [
         {
-            "identifier": "secev4lia-judge",
-            "endpoint": "https://api.secev4lia.dev/v1",
+            "identifier": "gemma3:4b",
+            "endpoint": "http://localhost:11434",
             "type": "harmbench",
         }
     ],

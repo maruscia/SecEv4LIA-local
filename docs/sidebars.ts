@@ -20,6 +20,8 @@ const sidebars: SidebarsConfig = {
       items: [
         'getting-started/installation',
         'getting-started/quick-start',
+        'getting-started/examples-ollama',
+        'getting-started/dashboard',
         'getting-started/attack-tutorial',
         'getting-started/datasets-tutorial',
       ],
@@ -172,7 +174,6 @@ const sidebars: SidebarsConfig = {
         'cli/initialization',
         'cli/config',
         'cli/attack',
-        'cli/examples-ollama',
         'cli/results',
       ],
     },

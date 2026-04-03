@@ -59,8 +59,9 @@ GENERATOR = {
 # ---------------------------------------------------------------------------
 JUDGES = [
     {
-        "identifier": "secev4lia-judge",
-        "endpoint": "/v1",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
+        "agent_type": "ollama",
         "type": "harmbench",
     },
 ]

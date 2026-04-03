@@ -7,7 +7,7 @@ Examples Commands
 Launch ready-to-run example scenarios from the CLI.
 """
 
-import importlib.util
+import importlib
 import shutil
 import subprocess
 from pathlib import Path
@@ -41,8 +41,18 @@ def _extract_ollama_models_from_demo_cfg(demo_cfg: dict) -> dict[str, str]:
     if attacker_model:
         models["attacker"] = str(attacker_model)
 
+    judge_model = None
     judge_cfg = attack_cfg.get("judge", {})
-    judge_model = judge_cfg.get("identifier")
+    if isinstance(judge_cfg, dict):
+        judge_model = judge_cfg.get("identifier")
+
+    if not judge_model:
+        judges_cfg = attack_cfg.get("judges")
+        if isinstance(judges_cfg, list) and judges_cfg:
+            first_judge = judges_cfg[0]
+            if isinstance(first_judge, dict):
+                judge_model = first_judge.get("identifier")
+
     if judge_model:
         models["judge"] = str(judge_model)
 

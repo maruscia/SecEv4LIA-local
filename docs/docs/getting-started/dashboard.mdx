@@ -1,0 +1,54 @@
+---
+sidebar_position: 5
+title: "Dashboard"
+---
+
+# Dashboard
+
+SecEv4LIA includes a local web dashboard to inspect runs, results, and metrics.
+
+## Prerequisites
+
+Install SecEv4LIA:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
+```
+
+## Launch Dashboard
+
+```bash
+secev web
+```
+
+Default URL:
+
+- `http://127.0.0.1:7860`
+
+The dashboard reads local results from:
+
+- `~/.local/share/secev4lia/secev4lia.db`
+
+## Useful Options
+
+```bash
+# Custom port
+secev web --port 8080
+
+# Expose on all interfaces
+secev web --host 0.0.0.0
+
+# Use a custom database path
+secev web --db-path /path/to/secev4lia.db
+
+# Do not auto-open browser
+secev web --no-browser
+```
+
+## Typical Workflow
+
+1. Run one or more attacks with `secev attack ...`
+2. Launch dashboard with `secev web`
+3. Review results, metrics, and trends in the browser

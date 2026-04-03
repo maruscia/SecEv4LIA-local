@@ -35,8 +35,8 @@ Compatible with OpenAI Python SDK:
 ```python
 from openai import OpenAI
 client = OpenAI(
-    api_key=\"your_secev4lia_api_key\",
-    base_url=\"https://api.secev4lia.dev\"
+    api_key=\"your_local_api_key\",
+    base_url=\"http://localhost:8000\"
 )
 response = client.chat.completions.create(
     model=\"any\",  # Will be overridden by server
@@ -93,8 +93,8 @@ Compatible with OpenAI Python SDK:
 ```python
 from openai import OpenAI
 client = OpenAI(
-    api_key=\"your_secev4lia_api_key\",
-    base_url=\"https://api.secev4lia.dev\"
+    api_key=\"your_local_api_key\",
+    base_url=\"http://localhost:8000\"
 )
 response = client.chat.completions.create(
     model=\"any\",  # Will be overridden by server
@@ -151,8 +151,8 @@ Compatible with OpenAI Python SDK:
 ```python
 from openai import OpenAI
 client = OpenAI(
-    api_key=\"your_secev4lia_api_key\",
-    base_url=\"https://api.secev4lia.dev\"
+    api_key=\"your_local_api_key\",
+    base_url=\"http://localhost:8000\"
 )
 response = client.chat.completions.create(
     model=\"any\",  # Will be overridden by server
@@ -209,8 +209,8 @@ Compatible with OpenAI Python SDK:
 ```python
 from openai import OpenAI
 client = OpenAI(
-    api_key=\"your_secev4lia_api_key\",
-    base_url=\"https://api.secev4lia.dev\"
+    api_key=\"your_local_api_key\",
+    base_url=\"http://localhost:8000\"
 )
 response = client.chat.completions.create(
     model=\"any\",  # Will be overridden by server

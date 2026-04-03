@@ -40,10 +40,10 @@ from pydantic import BaseModel, ConfigDict, Field
 # Canonical service defaults
 # ---------------------------------------------------------------------------
 
-SECEV4LIA_API_BASE = "https://api.secev4lia.dev/v1"
-SECEV4LIA_AGENT_TYPE = "OPENAI_SDK"
-DEFAULT_ATTACKER_IDENTIFIER = "secev4lia-attacker"
-DEFAULT_JUDGE_IDENTIFIER = "secev4lia-judge"
+SECEV4LIA_API_BASE = "http://localhost:11434"
+SECEV4LIA_AGENT_TYPE = "OLLAMA"
+DEFAULT_ATTACKER_IDENTIFIER = "gemma3:4b"
+DEFAULT_JUDGE_IDENTIFIER = "gemma3:4b"
 DEFAULT_CATEGORY_CLASSIFIER_IDENTIFIER = "gemma3:4b"
 DEFAULT_CATEGORY_CLASSIFIER_ENDPOINT = "http://localhost:11434"
 DEFAULT_CATEGORY_CLASSIFIER_AGENT_TYPE = "OLLAMA"
@@ -58,8 +58,8 @@ DEFAULT_MAX_OUTPUT_TOKENS = 4096
 class AttackerConfig(BaseModel):
     """Configuration for the attacker LLM.
 
-    Defaults to the shared SecEv4LIA attacker endpoint so users only need
-    to override what is different for their deployment.
+    Defaults to a local Ollama attacker endpoint using gemma3:4b so users
+    only need to override what is different for their deployment.
     """
 
     model_config = ConfigDict(extra="allow", validate_assignment=True)
@@ -101,7 +101,7 @@ class CategoryClassifierConfig(BaseModel):
 class JudgeConfig(BaseModel):
     """Configuration for one judge evaluator.
 
-    Defaults to the HarmBench judge on the shared SecEv4LIA endpoint.
+    Defaults to a HarmBench judge routed through local Ollama (gemma3:4b).
     """
 
     model_config = ConfigDict(extra="allow", validate_assignment=True)

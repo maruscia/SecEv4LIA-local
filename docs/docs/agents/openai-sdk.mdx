@@ -30,7 +30,9 @@ OpenAI SDK is the official Python library for interacting with OpenAI's API, inc
 
 4. **Install SecEv4LIA** (includes OpenAI SDK):
    ```bash
-   pip install secev4lia
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
    ```
 
 5. **(Optional) For Azure OpenAI**, set custom endpoint:
@@ -190,7 +192,9 @@ export OPENAI_API_KEY_PROD="sk-prod-..."
 ```bash
 pip install openai
 # or
-pip install secev  # OpenAI SDK is included
+python3 -m venv .venv
+source .venv/bin/activate
+pip install git+https://github.com/AISecurityLab/SecEv4LIA.git  # OpenAI SDK is included
 ```
 
 ### Authentication Errors

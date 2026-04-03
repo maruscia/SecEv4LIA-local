@@ -17,7 +17,9 @@ For installation instructions, see the [Installation Guide](../getting-started/i
 | `secev init` | Interactive setup wizard | [Initialization](./initialization.md) |
 | `secev config` | Manage configuration | [Config](./config.md) |
 | `secev attack` | Execute security attacks | [Attack](./attack.md) |
+| `secev examples ollama` | Run built-in Ollama demo | [Examples: Ollama Demo](../getting-started/examples-ollama.mdx) |
 | `secev results` | View and manage results | [Results](./results.md) |
+| `secev web` | Launch local dashboard | [Dashboard](../getting-started/dashboard.mdx) |
 | `secev version` | Show version info | - |
 
 ## Quick Examples

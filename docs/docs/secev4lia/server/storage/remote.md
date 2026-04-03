@@ -3,7 +3,7 @@ sidebar_label: remote
 title: secev4lia.server.storage.remote
 ---
 
-RemoteBackend — StorageBackend implementation backed by api.secev4lia.dev.
+RemoteBackend — StorageBackend implementation backed by Ollama localhost (gemma3:4b).
 
 This backend centralises all HTTP calls that were previously scattered across
 AgentRouter, AttackOrchestrator, Tracker, and StepTracker.  It is instantiated
@@ -15,7 +15,7 @@ when an API key is available and selected automatically by SecEv4LIA.
 class RemoteBackend()
 ```
 
-StorageBackend implementation that talks to api.secev4lia.dev.
+StorageBackend implementation that talks to the local Ollama endpoint (`http://localhost:11434`) using `gemma3:4b`.
 
 Wraps all HTTP calls behind the StorageBackend interface so that the rest
 of the SDK is entirely decoupled from HTTP concerns.

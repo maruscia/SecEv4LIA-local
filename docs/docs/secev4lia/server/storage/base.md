@@ -5,7 +5,7 @@ title: secev4lia.server.storage.base
 
 StorageBackend Protocol and record models.
 
-Both RemoteBackend (api.secev4lia.dev) and LocalBackend (SQLite) implement
+Both RemoteBackend (Ollama localhost, gemma3:4b) and LocalBackend (SQLite) implement
 the StorageBackend protocol, providing identical interfaces so that all
 callers — AgentRouter, Tracker, StepTracker, AttackOrchestrator, TUI — are
 fully decoupled from where data is actually persisted.

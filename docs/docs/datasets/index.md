@@ -43,7 +43,9 @@ graph LR
 ## Installation
 
 ```bash
-pip install secev4lia
+python3 -m venv .venv
+source .venv/bin/activate
+pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
 
 ## Quick Start
