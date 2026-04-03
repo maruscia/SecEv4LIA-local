@@ -190,9 +190,9 @@ def _patch_textual_terminal_queries() -> None:
 
 
 def _load_ollama_demo_module() -> ModuleType:
-    """Load examples/ollama/demo.py as a module."""
-    repo_root = Path(__file__).resolve().parents[3]
-    demo_path = repo_root / "examples" / "ollama" / "demo.py"
+    """Load secev4lia/examples/ollama/demo.py as a module."""
+    package_root = Path(__file__).resolve().parents[2]
+    demo_path = package_root / "examples" / "ollama" / "demo.py"
 
     spec = importlib.util.spec_from_file_location("secev4lia_ollama_demo", demo_path)
     if spec is None or spec.loader is None:
@@ -227,7 +227,7 @@ def ollama(ctx):
     demo_module = _load_ollama_demo_module()
     if not hasattr(demo_module, "build_ollama_demo_config"):
         raise click.ClickException(
-            "examples/ollama/demo.py must define build_ollama_demo_config()"
+            "secev4lia/examples/ollama/demo.py must define build_ollama_demo_config()"
         )
 
     demo_cfg = demo_module.build_ollama_demo_config()
