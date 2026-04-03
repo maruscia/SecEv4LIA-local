@@ -20,20 +20,15 @@
 SecEv4LIA is an open-source toolkit designed to help security researchers, developers and AI safety practitioners evaluate the security of AI agents. 
 It provides a structured approach to discover potential vulnerabilities, including prompt injection, jailbreaking techniques, and other attack vectors.
 
-## 🔥 Features
-
-- **Comprehensive Attack Library**: Pre-built techniques for prompt injections, jailbreaks, and goal hijacking
-- **Modular Framework**: Easily extend with custom attack vectors and testing methodologies
-- **Safety Focused**: Responsible disclosure guidelines and ethical usage recommendations
-
 ### 🔌 AI Agent Frameworks Supported
 
 [![LiteLLM](https://img.shields.io/badge/LiteLLM-blue?style=flat&logo=github)](https://github.com/BerriAI/litellm)
 [![Ollama](https://img.shields.io/badge/Ollama-local-black?style=flat)](https://ollama.com)
 [![ADK](https://img.shields.io/badge/Google-ADK-green?style=flat&logo=openai)](https://google.github.io/adk-docs/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-SDK-412991?style=flat&logo=openai)](https://platform.openai.com/docs)
+[![Ollama](https://img.shields.io/badge/Ollama-black?style=flat&logo=ollama)](https://ollama.com)
 
-## 🚀 Installation
+## 🚀 Quick Start
 
 
 ### Installation
@@ -46,31 +41,19 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
+Activate the environment
+```bash
+source .venv/bin/activate
+```
 
-## 📚 Quick Start
+## 📚 Example
+
+### TUI
 
 Run the interactive CLI to start testing your AI agents:
 
 ```bash
-secev
-```
-
-Or use the SDK:
-
-```python
-from secev4lia import SecEv4LIA, AgentTypeEnum
-
-agent = SecEv4LIA(
-    name="my_agent",
-    endpoint="http://localhost:8000",
-    agent_type=AgentTypeEnum.GOOGLE_ADK
-)
-
-results = agent.hack(attack_config={
-    "attack_type": "advprefix",
-    "goals": ["Test goal"],
-    # ... generator and judges config
-})
+secev examples ollama
 ```
 
 ## 📊 Reporting
