@@ -142,10 +142,10 @@ advanced_config = {
 
     # Attacker LLM — proposes prompt refinements
     "attacker": {
-        "identifier": "secev4lia-attacker",
-        "endpoint": "https://api.openai.com/v1",
-        "agent_type": "OPENAI_SDK",
-        "model": "gpt-4",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
+        "agent_type": "OLLAMA",
+        "model": "gemma3:4b",
         "max_tokens": 400,
         "temperature": 1.0,
         "top_p": 0.9,
@@ -159,9 +159,9 @@ advanced_config = {
 
     # Main judge — scores jailbreak success
     "judge": {
-        "identifier": "secev4lia-judge",
-        "endpoint": "https://api.openai.com/v1",
-        "agent_type": "OPENAI_SDK",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
+        "agent_type": "OLLAMA",
         "type": "harmbench",
         "api_key": None
     },

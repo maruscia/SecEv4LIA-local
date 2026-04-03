@@ -40,7 +40,7 @@ class TestAutoDANTurboConfig(unittest.TestCase):
         self.assertEqual(dumped["attack_type"], "autodan_turbo")
         self.assertEqual(dumped["autodan_turbo_params"]["epochs"], 2)
         self.assertEqual(dumped["scorer"]["identifier"], "custom-scorer")
-        self.assertEqual(dumped["summarizer"]["identifier"], "secev4lia-summarizer")
+        self.assertEqual(dumped["summarizer"]["identifier"], "gemma3:4b")
 
     def test_invalid_epochs_raise_validation_error(self):
         with self.assertRaises(ValidationError):

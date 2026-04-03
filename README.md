@@ -29,6 +29,7 @@ It provides a structured approach to discover potential vulnerabilities, includi
 ### 🔌 AI Agent Frameworks Supported
 
 [![LiteLLM](https://img.shields.io/badge/LiteLLM-blue?style=flat&logo=github)](https://github.com/BerriAI/litellm)
+[![Ollama](https://img.shields.io/badge/Ollama-local-black?style=flat)](https://ollama.com)
 [![ADK](https://img.shields.io/badge/Google-ADK-green?style=flat&logo=openai)](https://google.github.io/adk-docs/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-SDK-412991?style=flat&logo=openai)](https://platform.openai.com/docs)
 
@@ -40,13 +41,9 @@ It provides a structured approach to discover potential vulnerabilities, includi
 SecEv4LIA can be installed from PyPI or directly from GitHub:
 
 ```bash
-# With uv (recommended)
-uv add secev4lia
-
-# With pip (PyPI)
-pip install secev4lia
-
 # With pip (GitHub, latest)
+python3 -m venv .venv
+source .venv/bin/activate
 pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
 
@@ -55,7 +52,7 @@ pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 Run the interactive CLI to start testing your AI agents:
 
 ```bash
-secev4lia
+secev
 ```
 
 Or use the SDK:

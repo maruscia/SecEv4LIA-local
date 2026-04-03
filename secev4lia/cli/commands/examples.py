@@ -7,10 +7,9 @@ Examples Commands
 Launch ready-to-run example scenarios from the CLI.
 """
 
-import importlib.util
+import importlib
 import shutil
 import subprocess
-from pathlib import Path
 from types import ModuleType
 from urllib.error import URLError
 from urllib.parse import urljoin
@@ -190,24 +189,14 @@ def _patch_textual_terminal_queries() -> None:
 
 
 def _load_ollama_demo_module() -> ModuleType:
-    """Load examples/ollama/demo.py as a module."""
-    repo_root = Path(__file__).resolve().parents[3]
-    demo_path = repo_root / "examples" / "ollama" / "demo.py"
-
-    spec = importlib.util.spec_from_file_location("secev4lia_ollama_demo", demo_path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"Cannot load demo module from {demo_path}")
-
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
+    """Load the packaged secev4lia.examples.ollama.demo module."""
     try:
-        from textual.drivers.linux_inline_driver import LinuxInlineDriver
-
-        LinuxInlineDriver._query_in_band_window_resize = lambda self: None
-    except Exception:
-        pass
+        return importlib.import_module("secev4lia.examples.ollama.demo")
+    except ModuleNotFoundError as exc:
+        raise click.ClickException(
+            "Built-in Ollama demo module is not available. "
+            "Reinstall SecEv4LIA from the Git repository."
+        ) from exc
 
 
 @click.group()
@@ -227,7 +216,7 @@ def ollama(ctx):
     demo_module = _load_ollama_demo_module()
     if not hasattr(demo_module, "build_ollama_demo_config"):
         raise click.ClickException(
-            "examples/ollama/demo.py must define build_ollama_demo_config()"
+            "secev4lia.examples.ollama.demo must define build_ollama_demo_config()"
         )
 
     demo_cfg = demo_module.build_ollama_demo_config()

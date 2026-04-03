@@ -13,8 +13,13 @@ This tutorial introduces you to loading and using datasets with SecEv4LIA. You'l
 
 Before starting, ensure you have:
 
-1. ✅ **SecEv4LIA installed**: `pip install secev4lia`
-2. ✅ **Configuration** *(optional)*: Run `secev init` to configure preferences or an API key. An API key is **not required** — without one, SecEv4LIA stores results locally in `~/.local/share/secev4lia/secev4lia.db`.
+1. ✅ **SecEv4LIA installed**:
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
+    ```
+2. ✅ **Configuration** *(optional)*: Run `secev init` to configure verbosity and local preferences.
 3. ✅ **Target agent running**: An AI agent accessible via HTTP endpoint
 
 ## Why Use Datasets?
@@ -536,7 +541,9 @@ with open("evaluation_config.json", "w") as f:
 **Problem:** `ImportError: No module named 'datasets'`
 
 ```bash
-pip install secev4lia
+python3 -m venv .venv
+source .venv/bin/activate
+pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
 
 ### HuggingFace authentication required?

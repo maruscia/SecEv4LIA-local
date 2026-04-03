@@ -214,15 +214,17 @@ The SDK includes comprehensive default configuration:
 DEFAULT_CONFIG = {
     "output_dir": "./logs/runs",
     "generator": {
-        "identifier": "secev4lia/generate",
-        "endpoint": "http://localhost:11434/api/generate",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
+        "agent_type": "OLLAMA",
         "batch_size": 2,
         "max_tokens": 50,
         "temperature": 0.7
     },
     "judges": [{
-        "identifier": "secev4lia/judge",
-        "endpoint": "https:///judge",
+        "identifier": "gemma3:4b",
+        "endpoint": "http://localhost:11434",
+        "agent_type": "OLLAMA",
         "type": "harmbench"
     }],
     "min_char_length": 10,
@@ -307,7 +309,7 @@ results = agent.hack(
 Set up your environment properly:
 
 ```bash
-# Initialize SecEv4LIA with your API key (creates ~/.config/secev4lia/config.json)
+# Optional: initialize local CLI preferences (creates ~/.config/secev4lia/config.json)
 secev init
 
 # Optional: Agent endpoint
@@ -315,17 +317,6 @@ export AGENT_URL="http://localhost:8001"
 
 # Optional: External model endpoints
 export OLLAMA_BASE_URL="http://localhost:11434"
-```
-
-Alternatively, pass the API key directly:
-
-```python
-agent = SecEv4LIA(
-    name="my_agent",
-    endpoint="http://localhost:8000",
-    agent_type="google-adk",
-    api_key="your_api_key",  # Direct API key
-)
 ```
 
 ### Working with Results

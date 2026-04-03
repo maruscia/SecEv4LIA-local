@@ -67,10 +67,10 @@ class AutoDANTurboConfig(ConfigBase):
     attack_type: str = "autodan_turbo"
     autodan_turbo_params: AutoDANTurboParams = Field(default_factory=AutoDANTurboParams)
     scorer: AttackerConfig = Field(
-        default_factory=lambda: AttackerConfig(identifier="secev4lia-scorer")
+        default_factory=lambda: AttackerConfig(identifier="gemma3:4b")
     )
     summarizer: AttackerConfig = Field(
-        default_factory=lambda: AttackerConfig(identifier="secev4lia-summarizer")
+        default_factory=lambda: AttackerConfig(identifier="gemma3:4b")
     )
     embedder: Dict[str, Any] = Field(default_factory=default_category_classifier)
     target_request_overrides: Dict[str, Any] = Field(default_factory=dict)
@@ -129,9 +129,9 @@ DEFAULT_AUTODAN_TURBO_CONFIG: Dict[str, Any] = {
         "warm_up_only": False,
     },
     # Scorer LLM configuration (evaluates jailbreak success 1-10)
-    "scorer": _default_role_config("secev4lia-scorer"),
+    "scorer": _default_role_config("gemma3:4b"),
     # Summarizer LLM configuration (extracts strategies from prompt pairs)
-    "summarizer": _default_role_config("secev4lia-summarizer"),
+    "summarizer": _default_role_config("gemma3:4b"),
     # Embedder role used by strategy retrieval.
     # Shares the same schema and defaults as category_classifier.
     "embedder": default_category_classifier(),

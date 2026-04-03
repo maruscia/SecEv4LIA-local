@@ -2,9 +2,6 @@
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Installation
 
 Get SecEv4LIA up and running in seconds.
@@ -14,33 +11,14 @@ Get SecEv4LIA up and running in seconds.
 ### Requirements
 
 - **Python 3.10+**
-- **pip** or **uv** package manager
+- **pip**
 
 ### Production Installation
-
-<Tabs>
-  <TabItem value="uv" label="uv (Recommended)" default>
-
 ```bash
-uv add secev4lia
-```
-
-  </TabItem>
-  <TabItem value="pip" label="pip">
-
-```bash
-pip install secev4lia
-```
-
-  </TabItem>
-  <TabItem value="pip-git" label="pip (from GitHub)">
-
-```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install git+https://github.com/AISecurityLab/SecEv4LIA.git
 ```
-
-  </TabItem>
-</Tabs>
 
 ### Verify Installation
 
@@ -68,41 +46,12 @@ This will guide you through:
 SecEv4LIA runs entirely offline. Results are stored in `~/.local/share/secev4lia/secev4lia.db` and are fully accessible via `secev results list`, the TUI, and the local web dashboard (`secev web`). No data is sent to any remote server.
 :::
 
-## Development Installation
-
-For development or to access the latest features:
-
-<Tabs>
-  <TabItem value="uv-dev" label="uv (Recommended)" default>
-
-```bash
-# Clone the repository
-git clone https://github.com/AISecurityLab/secev4lia.git
-cd secev4lia
-
-# Install with uv
-uv sync --group dev
-```
-
-  </TabItem>
-  <TabItem value="pip-dev" label="pip">
-
-```bash
-# Clone the repository
-git clone https://github.com/AISecurityLab/secev4lia.git
-cd secev4lia
-
-# Install in development mode
-pip install -e ".[dev]"
-```
-
-  </TabItem>
-</Tabs>
-
 ---
 
 ## Next Steps
 
 - [**Quick Start**](./quick-start) — Get started in minutes
+- [**Examples: Ollama Demo**](./examples-ollama) — Launch a ready-to-run demo
+- [**Dashboard**](./dashboard) — Launch and use the local dashboard
 - [**Attack Tutorial**](./attack-tutorial) — Run your first security test
 - [**CLI Reference**](../cli/overview) — Command-line interface documentation

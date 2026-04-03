@@ -154,9 +154,9 @@ class TestCreateRouter:
         create_router(
             mock_client,
             {
-                "identifier": "secev4lia-judge",
-                "endpoint": "/v1",
-                "agent_type": "OPENAI_SDK",
+                "identifier": "gemma3:4b",
+                "endpoint": "http://localhost:11434",
+                "agent_type": "OLLAMA",
             },
             logger,
             "test-router",
@@ -196,8 +196,9 @@ class TestCreateRouter:
         mock_instance = MagicMock()
         mock_instance._agent_registry = {"key-1": MagicMock()}
         MockRouter.return_value = mock_instance
-        basic_config["identifier"] = "secev4lia-attacker"
-        basic_config["endpoint"] = "/v1"
+        basic_config["identifier"] = "gemma3:4b"
+        basic_config["endpoint"] = "http://localhost:11434"
+        basic_config["agent_type"] = "OLLAMA"
         basic_config["extra_body"] = {"reasoning": {"enabled": True}}
 
         create_router(mock_client, basic_config, logger, "test-router")
