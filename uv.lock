@@ -5868,14 +5868,16 @@ dev = [
     { name = "pytest-rerunfailures" },
     { name = "ruff" },
     { name = "secev4lia" },
-    { name = "transformers", marker = "sys_platform != 'win32'" },
-    { name = "vllm", marker = "sys_platform != 'win32'" },
 ]
 docs = [
     { name = "packaging" },
     { name = "pydoc-markdown" },
     { name = "requests" },
     { name = "toml" },
+]
+llm-local = [
+    { name = "transformers", marker = "sys_platform != 'win32'" },
+    { name = "vllm", marker = "sys_platform != 'win32'" },
 ]
 
 [package.metadata]
@@ -5911,14 +5913,16 @@ dev = [
     { name = "pytest-rerunfailures", specifier = ">=14.0" },
     { name = "ruff", specifier = ">=0.11.9" },
     { name = "secev4lia", editable = "." },
-    { name = "transformers", marker = "sys_platform != 'win32'", specifier = ">=4.40,<5.0" },
-    { name = "vllm", marker = "sys_platform != 'win32'", specifier = ">=0.11.0" },
 ]
 docs = [
     { name = "packaging", specifier = ">=24,<27" },
     { name = "pydoc-markdown", specifier = ">=4.8.2" },
     { name = "requests", specifier = ">=2.31.0" },
     { name = "toml", specifier = ">=0.10.2" },
+]
+llm-local = [
+    { name = "transformers", marker = "sys_platform != 'win32'", specifier = ">=4.40,<5.0" },
+    { name = "vllm", marker = "sys_platform != 'win32'", specifier = ">=0.11.0" },
 ]
 
 [[package]]

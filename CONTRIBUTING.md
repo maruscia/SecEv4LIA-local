@@ -130,6 +130,12 @@ To set up your environment for local development:
     
     Note: The `dev` dependencies are defined in `[dependency-groups]`.
 
+    Optional: if you need local vLLM/Transformers integrations, install the extra group:
+
+    ```bash
+    uv sync --group dev --group llm-local
+    ```
+
 4. (Optional but Recommended) Install pre-commit hooks:
 
     ```bash
