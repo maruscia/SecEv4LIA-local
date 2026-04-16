@@ -113,6 +113,27 @@ SUBCATEGORY_BY_NORMALIZED_NAME = {
 }
 
 
+def _strip_taxonomy_code_prefix(value: str) -> str:
+    """Drop leading taxonomy code prefixes like 'E.' or 'E2.' from a label."""
+    stripped = re.sub(
+        r"^\s*(?:[A-Z][0-9]+[\.)-]?|[A-Z][\.)-])\s*",
+        "",
+        value or "",
+    )
+    return stripped.strip()
+
+
+CATEGORY_BY_PLAIN_NAME = {
+    _normalize_lookup(_strip_taxonomy_code_prefix(category)): category
+    for category in RISK_CATEGORIES.keys()
+}
+SUBCATEGORY_BY_PLAIN_NAME = {
+    _normalize_lookup(_strip_taxonomy_code_prefix(subcategory)): subcategory
+    for subcategories in RISK_CATEGORIES.values()
+    for subcategory in subcategories
+}
+
+
 SYSTEM_PROMPT = (
     "You are a strict safety taxonomy classifier. "
     "Given one goal and a taxonomy, select exactly one category and one subcategory. "
@@ -429,7 +450,12 @@ def _resolve_category(value: Optional[str]) -> Optional[str]:
         return CATEGORY_BY_CODE.get(sub_match.group(1)[0])
 
     normalized = _normalize_lookup(candidate)
-    return CATEGORY_BY_NORMALIZED_NAME.get(normalized)
+    resolved = CATEGORY_BY_NORMALIZED_NAME.get(normalized)
+    if resolved:
+        return resolved
+
+    plain_normalized = _normalize_lookup(_strip_taxonomy_code_prefix(candidate))
+    return CATEGORY_BY_PLAIN_NAME.get(plain_normalized)
 
 
 def _resolve_subcategory(value: Optional[str]) -> Optional[str]:
@@ -451,7 +477,12 @@ def _resolve_subcategory(value: Optional[str]) -> Optional[str]:
             return by_code
 
     normalized = _normalize_lookup(candidate)
-    return SUBCATEGORY_BY_NORMALIZED_NAME.get(normalized)
+    resolved = SUBCATEGORY_BY_NORMALIZED_NAME.get(normalized)
+    if resolved:
+        return resolved
+
+    plain_normalized = _normalize_lookup(_strip_taxonomy_code_prefix(candidate))
+    return SUBCATEGORY_BY_PLAIN_NAME.get(plain_normalized)
 
 
 def _parse_classification(raw_text: str) -> Optional[Dict[str, str]]:

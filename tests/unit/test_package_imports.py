@@ -48,21 +48,11 @@ class TestPackageImports:
 
         assert AgentRouter is not None
 
-    def test_models_import(self):
-        """Test that models can be imported.
+    def test_storage_enums_import(self):
+        """Test that storage enums are importable."""
+        from secev4lia.server.storage.enums import EvaluationStatusEnum
 
-        This specifically tests for the python-dateutil dependency
-        which is used in model serialization.
-        """
-        from secev4lia.server.api.models import Agent
-
-        assert Agent is not None
-
-    def test_api_modules_import(self):
-        """Test that API modules can be imported."""
-        from secev4lia.server import api
-
-        assert api is not None
+        assert EvaluationStatusEnum is not None
 
     def test_attacks_import(self):
         """Test that attacks module can be imported."""

@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.prompt_injection.types
 ---
 
-Prompt Injection sub-types.
+Prompt Injection risk patterns.
 
 ## PromptInjectionType Objects
 
@@ -11,7 +11,7 @@ Prompt Injection sub-types.
 class PromptInjectionType(Enum)
 ```
 
-Sub-types for Prompt Injection.
+risk patterns for Prompt Injection.
 
 #### DIRECT\_INJECTION
 

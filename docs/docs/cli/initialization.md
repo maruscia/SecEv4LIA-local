@@ -80,5 +80,5 @@ You can run `secev init` again at any time to update your configuration. It will
 After initialization:
 
 1. **Verify your setup**: `secev config show`
-2. **Run your first attack**: See [Attack](./attack.md)
+2. **Run your first attack**: See [Attack](./attack.mdx)
 3. **View results**: See [Results](./results.md)

@@ -18,9 +18,7 @@ from typing import Any, Dict, List, Optional
 from secev4lia.attacks.objectives import OBJECTIVES
 from secev4lia.attacks.evaluator import PatternEvaluator, KeywordEvaluator
 from secev4lia.attacks.evaluator.evaluation_step import BaseEvaluationStep
-from secev4lia.server.api.result import result_partial_update
-from secev4lia.server.api.models import EvaluationStatusEnum, PatchedResultRequest
-from secev4lia.server.client import AuthenticatedClient
+from secev4lia.server.storage.enums import EvaluationStatusEnum
 from secev4lia.router.tracking import Tracker
 
 
@@ -249,7 +247,7 @@ def _update_result_status(
         result_id: UUID of the result to update
         success: Whether the attack was successful
         evaluation_notes: Notes explaining the evaluation
-        backend: StorageBackend (or legacy AuthenticatedClient) for API calls
+        backend: StorageBackend used for persistence
         logger: Logger instance
 
     Returns:
@@ -266,34 +264,13 @@ def _update_result_status(
             else EvaluationStatusEnum.FAILED_JAILBREAK
         )
 
-        # Prefer StorageBackend.update_result() when available
-        if hasattr(backend, "update_result"):
-            backend.update_result(
-                result_id=UUID(result_id),
-                evaluation_status=eval_status.value,
-                evaluation_notes=evaluation_notes,
-            )
-            logger.debug(f"Updated result {result_id} to {eval_status.value}")
-            return True
-
-        # Legacy fallback: raw AuthenticatedClient
-        result_request = PatchedResultRequest(
-            evaluation_status=eval_status,
+        backend.update_result(
+            result_id=UUID(result_id),
+            evaluation_status=eval_status.value,
             evaluation_notes=evaluation_notes,
         )
-        response = result_partial_update.sync_detailed(
-            client=backend,
-            id=UUID(result_id),
-            body=result_request,
-        )
-        if response.status_code < 300:
-            logger.debug(f"Updated result {result_id} to {eval_status.value}")
-            return True
-        else:
-            logger.warning(
-                f"Failed to update result {result_id}: status={response.status_code}"
-            )
-            return False
+        logger.debug(f"Updated result {result_id} to {eval_status.value}")
+        return True
 
     except Exception as e:
         logger.error(f"Exception updating result {result_id}: {e}")
@@ -307,16 +284,15 @@ def _sync_evaluation_to_server(
     goal_tracker: Optional[Tracker] = None,
 ) -> int:
     """
-    Sync evaluation results to the server using Tracker (preferred) or legacy method.
+    Sync evaluation results to storage using Tracker (preferred) or direct updates.
 
     With Tracker (preferred):
         - Finalizes each goal's Result with aggregated evaluation status
         - Adds evaluation traces showing detailed results
         - One Result per goal with all traces inside
 
-    Legacy method (fallback):
+    Direct update fallback:
         - Updates individual result_id records if present
-        - Creates scattered Results (one per LLM call)
 
     Args:
         evaluated_data: List of dicts with evaluation results
@@ -332,16 +308,16 @@ def _sync_evaluation_to_server(
     if tracker:
         return _finalize_goals_with_tracker(evaluated_data, tracker, logger)
 
-    # Legacy fallback: Update individual result_id records
-    client = config.get("_backend") or config.get("_client")
-    if not client:
-        logger.warning("No client available - cannot sync evaluation to server")
+    # Fallback: Update individual result_id records
+    backend = config.get("_backend") or config.get("_client")
+    if not backend:
+        logger.warning("No backend available - cannot sync evaluation")
         return 0
 
     # Check if any row has result_id (legacy tracking)
     has_result_ids = any(row.get("result_id") for row in evaluated_data)
     if not has_result_ids:
-        logger.warning("No result_id in data - cannot sync to server (legacy mode)")
+        logger.warning("No result_id in data - cannot sync evaluation")
         return 0
 
     updated_count = 0
@@ -356,12 +332,10 @@ def _sync_evaluation_to_server(
         success = row.get("success", False)
         notes = row.get("evaluation_notes", "")
 
-        if _update_result_status(result_id, success, notes, client, logger):
+        if _update_result_status(result_id, success, notes, backend, logger):
             updated_count += 1
 
-    logger.info(
-        f"Synced {updated_count}/{total_with_ids} evaluation results to server (legacy mode)"
-    )
+    logger.info(f"Synced {updated_count}/{total_with_ids} evaluation results")
     return updated_count
 
 
@@ -500,7 +474,7 @@ class BaselineEvaluation(BaseEvaluationStep):
         self,
         config: Dict[str, Any],
         logger: logging.Logger,
-        client: AuthenticatedClient,
+        client: Any,
     ):
         super().__init__(config, logger, client)
 

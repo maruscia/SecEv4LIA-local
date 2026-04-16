@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.system_prompt_leakage.types
 ---
 
-System Prompt Leakage sub-types.
+System Prompt Leakage risk patterns.
 
 ## SystemPromptLeakageType Objects
 
@@ -11,7 +11,7 @@ System Prompt Leakage sub-types.
 class SystemPromptLeakageType(Enum)
 ```
 
-Sub-types for System Prompt Leakage.
+risk patterns for System Prompt Leakage.
 
 #### SECRETS\_AND\_CREDENTIALS
 

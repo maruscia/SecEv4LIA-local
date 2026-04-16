@@ -17,7 +17,7 @@ or per-datapoint tracking, use the Tracker class from tracker.py instead.
 from contextlib import contextmanager
 from typing import Any, Dict, Optional
 
-from secev4lia.server.api.models import (
+from secev4lia.server.storage.enums import (
     EvaluationStatusEnum,
     StatusEnum,
     StepTypeEnum,

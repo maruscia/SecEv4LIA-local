@@ -5,7 +5,7 @@
 SecEv4LIA Dashboard
 
 A lightweight, self-hosted web dashboard that reads directly from the local
-SQLite storage (or a remote backend when an API key is configured).
+SQLite storage.
 
 Usage:
     from secev4lia.server.dashboard import create_app

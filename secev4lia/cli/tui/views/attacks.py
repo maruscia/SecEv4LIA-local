@@ -102,6 +102,39 @@ class AttacksTab(Container):
         margin-top: 1;
     }
 
+    /* Keep form labels readable regardless of hover/focus state. */
+    AttacksTab Label {
+        color: $text;
+        text-style: bold;
+    }
+
+    AttacksTab Label:hover {
+        color: $text;
+    }
+
+    AttacksTab Collapsible Label {
+        color: $text;
+        text-style: bold;
+    }
+
+    /* Keep Input Source radio labels visible in all states. */
+    AttacksTab RadioButton {
+        color: $text;
+    }
+
+    AttacksTab RadioButton > .toggle--label {
+        color: $text;
+    }
+
+    AttacksTab RadioButton.-on > .toggle--label {
+        color: #ffffff;
+    }
+
+    AttacksTab RadioButton:hover > .toggle--label,
+    AttacksTab RadioButton:focus > .toggle--label {
+        color: $text;
+    }
+
     AttacksTab .field-description {
         color: $text-muted;
         margin-bottom: 1;

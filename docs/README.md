@@ -26,7 +26,7 @@ npm run start
 
 ## View Documentation
 
-After generation, the API reference will be available directly in `docs/docs/` and integrated into the main documentation site.
+After generation, the SDK reference will be available directly in `docs/docs/` and integrated into the main documentation site.
 
 ```bash
 # View documentation locally

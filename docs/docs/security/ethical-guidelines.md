@@ -72,20 +72,13 @@ docker stats secev4lia-test
 
 **Authentication Best Practices:**
 ```python
-import os
 from secev4lia import SecEv4LIA
 
-# Use environment variables for credentials
-api_key = os.getenv('SECEV4LIA_API_KEY')
-if not api_key:
-    raise ValueError("API key not found in environment")
-
-# Configure secure headers
+# Configure explicit local safeguards
 agent = SecEv4LIA(
-    api_key=api_key,
-    timeout=30,  # Reasonable timeout
-    max_retries=3,  # Limit retry attempts
-    verify_ssl=True  # Always verify SSL certificates
+    endpoint="http://localhost:11434",
+    timeout=30,       # Reasonable timeout
+    max_retries=3,    # Limit retry attempts
 )
 ```
 

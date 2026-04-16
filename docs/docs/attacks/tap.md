@@ -10,14 +10,6 @@ TAP (Tree of Attacks with Pruning) is an efficient adversarial attack technique 
 
 TAP frames jailbreaking as a **tree search** where each node represents an attacker-generated prompt candidate. Multiple independent search streams run in parallel, and branches that drift off-topic or score poorly are pruned before querying the target, saving cost and improving signal quality.
 
-### Key Features
-
-- **Tree Search**: Explores branching refinements in parallel streams
-- **On-Topic Pruning**: Discards branches that drift from the original goal before querying the target
-- **Score Pruning**: Keeps only the highest-scoring branches at each depth level
-- **Early Stopping**: Returns immediately when a successful jailbreak is found
-- **Research-Backed**: Based on peer-reviewed academic work
-
 ### Research Foundation
 
 TAP is based on the paper:

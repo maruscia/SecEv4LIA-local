@@ -28,7 +28,7 @@ from typing import Any, Dict, List, Optional
 from uuid import UUID
 
 from secev4lia.server.storage.base import StorageBackend
-from secev4lia.server.api.models import EvaluationStatusEnum, StepTypeEnum
+from secev4lia.server.storage.enums import EvaluationStatusEnum, StepTypeEnum
 
 from .category_classifier import (
     GoalCategoryClassifier,

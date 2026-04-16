@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.input_manipulation_attack.types
 ---
 
-Input Manipulation Attack sub-types.
+Input Manipulation Attack risk patterns.
 
 ## InputManipulationAttackType Objects
 
@@ -11,7 +11,7 @@ Input Manipulation Attack sub-types.
 class InputManipulationAttackType(Enum)
 ```
 
-Sub-types for Input Manipulation Attack.
+risk patterns for Input Manipulation Attack.
 
 #### ENCODING\_BYPASS
 

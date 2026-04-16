@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.misinformation.types
 ---
 
-Misinformation sub-types.
+Misinformation risk patterns.
 
 ## MisinformationType Objects
 
@@ -11,7 +11,7 @@ Misinformation sub-types.
 class MisinformationType(Enum)
 ```
 
-Sub-types for Misinformation.
+risk patterns for Misinformation.
 
 #### FACTUAL\_FABRICATION
 

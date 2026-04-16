@@ -11,15 +11,6 @@ from click.testing import CliRunner
 from secev4lia.cli.commands.web import web
 
 
-class _DummyRemoteBackend:
-    def __init__(self):
-        self.get_context_calls = 0
-
-    def get_context(self):
-        self.get_context_calls += 1
-        return {"ok": True}
-
-
 class _DummyLocalBackend:
     pass
 
@@ -32,27 +23,13 @@ class TestWebCommand(unittest.TestCase):
         mock_socket.__enter__.return_value.connect_ex.return_value = 1
         return mock_socket
 
-    def test_web_falls_back_to_local_backend_when_remote_preflight_fails(self):
+    def test_web_uses_local_backend(self):
         runner = CliRunner()
         config = MagicMock()
-        config.api_key = "test-key"
-        config.base_url = ""
-
-        remote_backend = _DummyRemoteBackend()
-
-        def _raise_preflight_error():
-            raise RuntimeError("remote unavailable")
-
-        remote_backend.get_context = _raise_preflight_error
         local_backend = _DummyLocalBackend()
         app = MagicMock()
 
         with (
-            patch("secev4lia.server.client.AuthenticatedClient"),
-            patch(
-                "secev4lia.server.storage.remote.RemoteBackend",
-                return_value=remote_backend,
-            ),
             patch(
                 "secev4lia.server.storage.local.LocalBackend",
                 return_value=local_backend,

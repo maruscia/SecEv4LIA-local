@@ -230,7 +230,7 @@ class EvaluatorConfig(BaseModel):
     """
 
     agent_name: str
-    agent_type: Any  # AgentTypeEnum from secev4lia.server.api.models
+    agent_type: Any  # AgentTypeEnum from secev4lia.router.types
     model_id: str
     agent_endpoint: Optional[str] = None
     organization_id: Optional[int] = None

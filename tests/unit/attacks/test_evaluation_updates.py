@@ -23,7 +23,7 @@ from unittest.mock import MagicMock
 from types import SimpleNamespace
 from uuid import uuid4
 
-from secev4lia.server.api.models import EvaluationStatusEnum
+from secev4lia.server.storage.enums import EvaluationStatusEnum
 from secev4lia.router.tracking import Tracker
 
 
@@ -152,19 +152,15 @@ class TestEvaluationEndToEnd(unittest.TestCase):
         """
         FIXED: Baseline attack now updates results after evaluation.
 
-        The evaluation step now calls result_partial_update to sync status to server.
+        The evaluation step syncs status through StorageBackend.update_result.
         """
         from secev4lia.attacks.techniques.baseline import evaluation
         import inspect
 
-        # Check that evaluation.py now calls result_partial_update
+        # Check that evaluation.py performs storage sync updates
         source = inspect.getsource(evaluation)
 
-        self.assertIn(
-            "result_partial_update",
-            source,
-            "Fix confirmed: evaluation.py now imports result_partial_update",
-        )
+        self.assertIn("update_result", source)
 
         self.assertIn(
             "_sync_evaluation_to_server",

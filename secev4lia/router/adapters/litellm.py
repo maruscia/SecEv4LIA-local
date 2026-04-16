@@ -3,7 +3,6 @@
 
 
 from secev4lia.logger import get_logger
-import os
 from typing import Any, Dict, List, Optional
 
 from .base import ChatCompletionsAgent, AdapterConfigurationError
@@ -150,30 +149,11 @@ class LiteLLMAgent(ChatCompletionsAgent):
             config_key="api_key", env_var_fallback=env_var_fallback
         )
 
-        # When using custom endpoint, determine auth strategy
+        # When using custom endpoint without credentials, rely on endpoint-side auth.
         if self.api_base_url and not self.actual_api_key:
-            if self.model_name.startswith("secev4lia/"):
-                # secev4lia/* models need the SecEv4LIA API key
-                # Try to get from config first (passed by router), then environment
-                secev4lia_key = self._get_config_key("secev4lia_api_key")
-                if not secev4lia_key:
-                    secev4lia_key = os.environ.get("SECEV4LIA_API_KEY")
-
-                if secev4lia_key:
-                    self.actual_api_key = secev4lia_key
-                    self.logger.debug(
-                        f"Using SECEV4LIA_API_KEY for {self.model_name} service"
-                    )
-                else:
-                    self.logger.warning(
-                        f"SecEv4LIA model '{self.model_name}' requires SECEV4LIA_API_KEY but none found. "
-                        f"Requests will likely fail with authentication errors."
-                    )
-            else:
-                # Other custom endpoints (LangChain, local APIs, etc.) - no api_key needed
-                self.logger.debug(
-                    f"Using custom endpoint '{self.api_base_url}' without api_key - endpoint handles its own auth"
-                )
+            self.logger.debug(
+                f"Using custom endpoint '{self.api_base_url}' without api_key - endpoint handles its own auth"
+            )
 
         self.logger.info(
             f"LiteLLMAgent '{self.id}' initialized for model: '{self.model_name}'"
@@ -230,11 +210,6 @@ class LiteLLMAgent(ChatCompletionsAgent):
                 # For OpenAI-compatible endpoints, this should be the base URL (e.g., http://host:port/v1)
                 # and the OpenAI client will append /chat/completions automatically
                 litellm_params["api_base"] = self.api_base_url
-            elif self.model_name.startswith("secev4lia/"):
-                # Special handling for secev4lia/* models
-                litellm_params["custom_llm_provider"] = "openai"
-                litellm_params["api_base"] = self.api_base_url
-
             litellm_params["extra_headers"] = {"User-Agent": "SecEv4LIA/0.1.0"}
 
         litellm_params.update(kwargs)

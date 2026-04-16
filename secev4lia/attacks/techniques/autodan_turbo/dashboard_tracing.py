@@ -5,7 +5,7 @@
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
-from secev4lia.server.api.models import StepTypeEnum
+from secev4lia.server.storage.enums import StepTypeEnum
 
 
 def emit_phase_trace(

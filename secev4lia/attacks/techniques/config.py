@@ -40,8 +40,8 @@ from pydantic import BaseModel, ConfigDict, Field
 # Canonical service defaults
 # ---------------------------------------------------------------------------
 
-SECEV4LIA_API_BASE = "http://localhost:11434"
-SECEV4LIA_AGENT_TYPE = "OLLAMA"
+DEFAULT_LOCAL_MODEL_ENDPOINT = "http://localhost:11434"
+DEFAULT_LOCAL_AGENT_TYPE = "OLLAMA"
 DEFAULT_ATTACKER_IDENTIFIER = "gemma3:4b"
 DEFAULT_JUDGE_IDENTIFIER = "gemma3:4b"
 DEFAULT_CATEGORY_CLASSIFIER_IDENTIFIER = "gemma3:4b"
@@ -65,8 +65,8 @@ class AttackerConfig(BaseModel):
     model_config = ConfigDict(extra="allow", validate_assignment=True)
 
     identifier: str = DEFAULT_ATTACKER_IDENTIFIER
-    endpoint: str = SECEV4LIA_API_BASE
-    agent_type: str = SECEV4LIA_AGENT_TYPE
+    endpoint: str = DEFAULT_LOCAL_MODEL_ENDPOINT
+    agent_type: str = DEFAULT_LOCAL_AGENT_TYPE
     api_key: Optional[str] = None
     max_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS
     temperature: float = 1.0
@@ -107,8 +107,8 @@ class JudgeConfig(BaseModel):
     model_config = ConfigDict(extra="allow", validate_assignment=True)
 
     identifier: str = DEFAULT_JUDGE_IDENTIFIER
-    endpoint: Optional[str] = SECEV4LIA_API_BASE
-    agent_type: str = SECEV4LIA_AGENT_TYPE
+    endpoint: Optional[str] = DEFAULT_LOCAL_MODEL_ENDPOINT
+    agent_type: str = DEFAULT_LOCAL_AGENT_TYPE
     type: str = "harmbench"
     api_key: Optional[str] = None
     top_p: Optional[float] = None
@@ -313,8 +313,8 @@ DEFAULT_MAX_JUDGE_RETRIES: int = JudgeEvalConfig.model_fields[
 ].default
 
 __all__ = [
-    "SECEV4LIA_API_BASE",
-    "SECEV4LIA_AGENT_TYPE",
+    "DEFAULT_LOCAL_MODEL_ENDPOINT",
+    "DEFAULT_LOCAL_AGENT_TYPE",
     "DEFAULT_ATTACKER_IDENTIFIER",
     "DEFAULT_JUDGE_IDENTIFIER",
     "DEFAULT_CATEGORY_CLASSIFIER_IDENTIFIER",

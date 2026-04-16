@@ -91,10 +91,6 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "google_adk: mark test as requiring Google ADK")
     config.addinivalue_line("markers", "litellm: mark test as requiring LiteLLM")
     config.addinivalue_line("markers", "slow: mark test as slow running")
-    config.addinivalue_line(
-        "markers",
-        "secev4lia_backend: mark test as requiring SecEv4LIA backend (may be rate limited)",
-    )
 
 
 def pytest_collection_modifyitems(config, items):
@@ -148,18 +144,6 @@ def max_tokens_slow() -> int:
 
 
 # --- Environment Configuration Fixtures ---
-
-
-@pytest.fixture(scope="session")
-def secev4lia_api_base_url() -> str:
-    """Deprecated: returns empty string. SecEv4LIA is local-only."""
-    return ""
-
-
-@pytest.fixture(scope="session")
-def secev4lia_api_key() -> Optional[str]:
-    """Deprecated: returns None. SecEv4LIA is local-only."""
-    return None
 
 
 # --- Ollama Fixtures ---
@@ -541,9 +525,7 @@ def litellm_config(
 
 
 @pytest.fixture
-def secev4lia_client_factory(
-    secev4lia_api_base_url: str, secev4lia_api_key: Optional[str]
-):
+def secev4lia_client_factory():
     """Factory fixture to create SecEv4LIA instances for different frameworks."""
     from secev4lia import SecEv4LIA, AgentTypeEnum
 
@@ -555,8 +537,6 @@ def secev4lia_client_factory(
             name=name,
             endpoint=endpoint,
             agent_type=agent_type,
-            base_url=secev4lia_api_base_url,
-            api_key=secev4lia_api_key,
             **kwargs,
         )
 
@@ -613,10 +593,9 @@ def advprefix_attack_config_with_ollama_judges(
 
 
 @pytest.fixture
-def skip_if_no_secev4lia_key(secev4lia_api_key: Optional[str]):
-    """Skip test if SecEv4LIA API key is not configured."""
-    if not secev4lia_api_key:
-        pytest.skip("SECEV4LIA_API_KEY not configured")
+def skip_if_no_secev4lia_key():
+    """Compatibility fixture kept for local-only mode."""
+    return None
 
 
 @pytest.fixture

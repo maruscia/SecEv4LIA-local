@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.excessive_agency.types
 ---
 
-Excessive Agency sub-types.
+Excessive Agency risk patterns.
 
 ## ExcessiveAgencyType Objects
 
@@ -11,7 +11,7 @@ Excessive Agency sub-types.
 class ExcessiveAgencyType(Enum)
 ```
 
-Sub-types for Excessive Agency.
+risk patterns for Excessive Agency.
 
 #### FUNCTIONALITY
 

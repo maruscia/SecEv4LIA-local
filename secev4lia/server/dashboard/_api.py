@@ -57,7 +57,7 @@ def register_api(backend) -> None:
         ctx = backend.get_context()
         return {
             "status": "ok",
-            "mode": "local" if backend.get_api_key() is None else "remote",
+            "mode": "local",
             "org_id": str(ctx.org_id),
             "user_id": ctx.user_id,
             "db_path": str(backend._db_path) if hasattr(backend, "_db_path") else None,

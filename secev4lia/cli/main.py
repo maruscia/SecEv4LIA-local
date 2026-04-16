@@ -22,6 +22,7 @@ from secev4lia.cli.commands import (
     config,
     examples,
     results,
+    scan as scan_cmd,
     web as web_cmd,
 )
 from secev4lia.cli.config import CLIConfig
@@ -499,6 +500,7 @@ cli.add_command(agent.agent)
 cli.add_command(attack.attack)
 cli.add_command(examples.examples)
 cli.add_command(results.results)
+cli.add_command(scan_cmd.scan)
 cli.add_command(web_cmd.web)
 
 

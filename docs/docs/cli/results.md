@@ -159,5 +159,5 @@ Results are also saved locally in `./logs/runs/` for offline access:
 
 ## See Also
 
-- [Attack](./attack.md) — Run security attacks
+- [Attack](./attack.mdx) — Run security attacks
 - [Config](./config.md) — Configure SecEv4LIA settings

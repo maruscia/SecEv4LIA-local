@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.malicious_tool_invocation.types
 ---
 
-Malicious Tool Invocation sub-types.
+Malicious Tool Invocation risk patterns.
 
 ## MaliciousToolInvocationType Objects
 
@@ -11,7 +11,7 @@ Malicious Tool Invocation sub-types.
 class MaliciousToolInvocationType(Enum)
 ```
 
-Sub-types for Malicious Tool Invocation.
+risk patterns for Malicious Tool Invocation.
 
 #### UNTRUSTED\_TOOL\_EXECUTION
 

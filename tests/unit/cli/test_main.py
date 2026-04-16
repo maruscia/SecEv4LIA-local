@@ -24,7 +24,7 @@ class TestMainCLI:
             "secev agent list",
             "secev attack advprefix",
             "Environment Variables:",
-            "SECEV4LIA_API_KEY",
+            "OPENROUTER_API_KEY",
         ]
 
         # In a real test, you'd run the CLI and check the output
@@ -43,7 +43,7 @@ class TestMainCLI:
             "ASCII logo display",
             "SecEv4LIA CLI version",
             "Configuration status",
-            "API Base URL",
+            "Storage path",
         ]
 
         # In a real test:
@@ -59,8 +59,7 @@ class TestMainCLI:
         expected_flow = [
             "Logo display",
             "Setup wizard greeting",
-            "API key prompt",
-            "Base URL prompt",
+            "local configuration prompt",
             "Configuration save",
         ]
 
@@ -120,8 +119,7 @@ class TestMainCLI:
     def test_environment_variable_handling(self):
         """Test environment variable processing"""
         env_vars = {
-            "SECEV4LIA_API_KEY": "env-test-key",
-            "SECEV4LIA_BASE_URL": "https://env.example.com",
+            "OPENROUTER_API_KEY": "env-test-key",
             "SECEV4LIA_DEBUG": "1",
         }
 
