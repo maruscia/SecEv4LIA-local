@@ -21,8 +21,6 @@ Run with:
 
 Environment Variables:
     GOOGLE_ADK_AGENT_URL or AGENT_URL: URL of the running ADK agent
-    SECEV4LIA_API_KEY: SecEv4LIA API key
-    SECEV4LIA_API_BASE_URL: SecEv4LIA backend URL
 """
 
 import logging
@@ -338,98 +336,6 @@ class TestGoogleADKSecEv4LIAIntegration:
 
         assert results is not None
         logger.info(f"Attack with Ollama judges completed: {results}")
-
-
-@pytest.mark.integration
-@pytest.mark.google_adk
-class TestGoogleADKRouterIntegration:
-    """Integration tests for AgentRouter with Google ADK."""
-
-    def test_router_creates_adk_adapter(
-        self,
-        skip_if_google_adk_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        google_adk_agent_url: str,
-    ):
-        """Test that AgentRouter correctly creates ADKAgent adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-        from secev4lia.router.adapters.google_adk import ADKAgent
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        from secev4lia.server.storage.remote import RemoteBackend
-
-        backend = RemoteBackend(client)
-
-        router = AgentRouter(
-            backend=backend,
-            name="multi_tool_agent",
-            agent_type=AgentTypeEnum.GOOGLE_ADK,
-            endpoint=google_adk_agent_url,
-        )
-
-        # Verify adapter was created
-        agent_id = str(router.backend_agent.id)
-        adapter = router.get_agent_instance(registration_key=agent_id)
-
-        assert isinstance(adapter, ADKAgent)
-        logger.info(f"Router created ADK adapter: {adapter.id}")
-
-    def test_router_handles_adk_request(
-        self,
-        skip_if_google_adk_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        google_adk_agent_url: str,
-    ):
-        """Test that router can handle requests through ADK adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        from secev4lia.server.storage.remote import RemoteBackend
-
-        backend = RemoteBackend(client)
-
-        router = AgentRouter(
-            backend=backend,
-            name="multi_tool_agent",
-            agent_type=AgentTypeEnum.GOOGLE_ADK,
-            endpoint=google_adk_agent_url,
-        )
-
-        # Route a request
-        agent_id = str(router.backend_agent.id)
-        request_data = {
-            "prompt": "What can you help me with?",
-            "max_tokens": 15,
-        }
-
-        response = router.route_request(
-            registration_key=agent_id, request_data=request_data
-        )
-
-        assert response is not None
-        assert "processed_response" in response
-        if response.get("error_message"):
-            logger.warning(f"Router ADK error: {response.get('error_message')}")
-        elif response.get("processed_response"):
-            logger.info(f"Router ADK response: {response['processed_response'][:50]}")
-        else:
-            logger.warning("Router ADK returned empty response")
 
 
 @pytest.mark.integration

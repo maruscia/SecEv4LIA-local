@@ -88,7 +88,7 @@ class TestUpdateSingleResult(unittest.TestCase):
             backend=mock_client,
         )
 
-        from secev4lia.server.api.models import EvaluationStatusEnum
+        from secev4lia.server.storage.enums import EvaluationStatusEnum
 
         call_kwargs = mock_client.update_result.call_args
         evaluation_status = call_kwargs.kwargs.get("evaluation_status") or call_kwargs[
@@ -109,7 +109,7 @@ class TestUpdateSingleResult(unittest.TestCase):
             backend=mock_client,
         )
 
-        from secev4lia.server.api.models import EvaluationStatusEnum
+        from secev4lia.server.storage.enums import EvaluationStatusEnum
 
         call_kwargs = mock_client.update_result.call_args
         evaluation_status = call_kwargs.kwargs.get("evaluation_status") or call_kwargs[

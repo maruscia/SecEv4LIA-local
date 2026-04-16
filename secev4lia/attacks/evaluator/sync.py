@@ -29,7 +29,7 @@ import logging
 from typing import Any, Dict, List, Optional
 from uuid import UUID
 
-from secev4lia.server.api.models import EvaluationStatusEnum
+from secev4lia.server.storage.enums import EvaluationStatusEnum
 
 logger = logging.getLogger("secev4lia.attacks.evaluator.sync")
 

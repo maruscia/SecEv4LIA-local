@@ -15,13 +15,6 @@ Baseline attacks work by combining known jailbreak templates with your test obje
 - **Establishing baselines**: Measure before deploying advanced attacks
 - **Template development**: Test new prompt injection patterns
 
-### Key Features
-
-- **Fast Execution**: No iterative refinement or optimization loops
-- **Template Library**: Pre-built categories of attack patterns
-- **Customizable**: Add your own templates
-- **Objective-Based Evaluation**: Automatic success assessment
-
 ---
 
 ## How Baseline Attacks Work

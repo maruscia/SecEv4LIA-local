@@ -16,8 +16,9 @@ For installation instructions, see the [Installation Guide](../getting-started/i
 | `secev` | Launch TUI interface | [Quick Start](../getting-started/quick-start.mdx) |
 | `secev init` | Interactive setup wizard | [Initialization](./initialization.md) |
 | `secev config` | Manage configuration | [Config](./config.md) |
-| `secev attack` | Execute security attacks | [Attack](./attack.md) |
-| `secev examples ollama` | Run built-in Ollama demo | [Examples: Ollama Demo](../getting-started/examples-ollama.mdx) |
+| `secev scan` | Run quick 3-attack security scan | [Quick Security Scan](../getting-started/quick-security-scan.mdx) |
+| `secev attack` | Execute security attacks | [Attack](./attack.mdx) |
+| `secev examples ollama` | Run built-in Ollama demo | [Quick Start (TUI tab)](../getting-started/quick-start.mdx) |
 | `secev results` | View and manage results | [Results](./results.md) |
 | `secev web` | Launch local dashboard | [Dashboard](../getting-started/dashboard.mdx) |
 | `secev version` | Show version info | - |
@@ -38,6 +39,15 @@ secev attack advprefix \
   --agent-type "google-adk" \
   --endpoint "http://localhost:8000" \
   --goals "Test security vulnerability"
+```
+
+### Run Quick Security Scan
+
+```bash
+secev scan \
+  --agent-name "my-agent" \
+  --agent-type "google-adk" \
+  --endpoint "http://localhost:8000/chat"
 ```
 
 ### View Results

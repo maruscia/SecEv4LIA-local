@@ -57,7 +57,7 @@ Configuration class for response evaluators using AgentRouter framework.
 
 #### agent\_type
 
-AgentTypeEnum from secev4lia.server.api.models
+AgentTypeEnum from secev4lia.router.types
 
 #### coerce\_agent\_type
 

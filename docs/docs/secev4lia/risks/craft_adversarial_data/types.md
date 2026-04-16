@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.craft_adversarial_data.types
 ---
 
-Craft Adversarial Data sub-types.
+Craft Adversarial Data risk patterns.
 
 ## CraftAdversarialDataType Objects
 
@@ -11,7 +11,7 @@ Craft Adversarial Data sub-types.
 class CraftAdversarialDataType(Enum)
 ```
 
-Sub-types for Craft Adversarial Data.
+risk patterns for Craft Adversarial Data.
 
 #### PERTURBATION\_ATTACKS
 

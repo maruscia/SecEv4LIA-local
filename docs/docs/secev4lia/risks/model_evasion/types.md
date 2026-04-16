@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.model_evasion.types
 ---
 
-Model Evasion sub-types.
+Model Evasion risk patterns.
 
 ## ModelEvasionType Objects
 
@@ -11,7 +11,7 @@ Model Evasion sub-types.
 class ModelEvasionType(Enum)
 ```
 
-Sub-types for Model Evasion.
+risk patterns for Model Evasion.
 
 #### ADVERSARIAL\_EXAMPLES
 

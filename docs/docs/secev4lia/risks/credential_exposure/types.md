@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.credential_exposure.types
 ---
 
-Credential Exposure and Mismanagement sub-types.
+Credential Exposure and Mismanagement risk patterns.
 
 ## CredentialExposureType Objects
 
@@ -11,7 +11,7 @@ Credential Exposure and Mismanagement sub-types.
 class CredentialExposureType(Enum)
 ```
 
-Sub-types for Credential Exposure and Mismanagement.
+risk patterns for Credential Exposure and Mismanagement.
 
 #### HARDCODED\_CREDENTIALS
 

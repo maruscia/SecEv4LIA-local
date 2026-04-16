@@ -228,7 +228,6 @@ class TestLiteLLMAdapterIntegration:
 
 @pytest.mark.integration
 @pytest.mark.litellm
-@pytest.mark.secev4lia_backend
 class TestLiteLLMSecEv4LIAIntegration:
     """End-to-end tests for SecEv4LIA with LiteLLM backend."""
 
@@ -320,106 +319,6 @@ class TestLiteLLMSecEv4LIAIntegration:
 
         assert results is not None
         logger.info(f"Advprefix attack completed: {results}")
-
-
-@pytest.mark.integration
-@pytest.mark.litellm
-@pytest.mark.secev4lia_backend
-class TestLiteLLMRouterIntegration:
-    """Integration tests for AgentRouter with LiteLLM."""
-
-    def test_router_creates_litellm_adapter(
-        self,
-        skip_if_litellm_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        litellm_model: str,
-        ollama_base_url: str,
-    ):
-        """Test that AgentRouter correctly creates LiteLLMAgent adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.server.storage.remote import RemoteBackend
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-        from secev4lia.router.adapters.litellm import LiteLLMAgent
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        backend = RemoteBackend(client)
-
-        endpoint = (
-            ollama_base_url
-            if litellm_model.startswith("ollama/")
-            else "https://api.openai.com/v1"
-        )
-
-        router = AgentRouter(
-            backend=backend,
-            name=litellm_model,
-            agent_type=AgentTypeEnum.LITELLM,
-            endpoint=endpoint,
-        )
-
-        # Verify adapter was created
-        agent_id = str(router.backend_agent.id)
-        adapter = router.get_agent_instance(registration_key=agent_id)
-
-        assert isinstance(adapter, LiteLLMAgent)
-        logger.info(f"Router created LiteLLM adapter: {adapter.id}")
-
-    def test_router_handles_litellm_request(
-        self,
-        skip_if_litellm_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        litellm_model: str,
-        ollama_base_url: str,
-    ):
-        """Test that router can handle requests through LiteLLM adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.server.storage.remote import RemoteBackend
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        backend = RemoteBackend(client)
-
-        endpoint = (
-            ollama_base_url
-            if litellm_model.startswith("ollama/")
-            else "https://api.openai.com/v1"
-        )
-
-        router = AgentRouter(
-            backend=backend,
-            name=litellm_model,
-            agent_type=AgentTypeEnum.LITELLM,
-            endpoint=endpoint,
-        )
-
-        # Route a request
-        agent_id = str(router.backend_agent.id)
-        request_data = {
-            "messages": [{"role": "user", "content": "Say hello in one word!"}],
-            "max_tokens": 10,
-        }
-
-        response = router.route_request(
-            registration_key=agent_id, request_data=request_data
-        )
-
-        assert response is not None
-        assert "processed_response" in response
-        logger.info(f"Router LiteLLM response: {response['processed_response']}")
 
 
 @pytest.mark.integration

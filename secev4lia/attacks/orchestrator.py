@@ -34,7 +34,7 @@ from uuid import UUID
 import httpx
 
 from secev4lia.errors import SecEv4LIAError
-from secev4lia.server.api.models import StatusEnum
+from secev4lia.server.storage.enums import StatusEnum
 
 if TYPE_CHECKING:
     from secev4lia.agent import SecEv4LIA

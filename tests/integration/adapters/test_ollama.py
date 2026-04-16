@@ -183,7 +183,6 @@ class TestOllamaAdapterIntegration:
 
 @pytest.mark.integration
 @pytest.mark.ollama
-@pytest.mark.secev4lia_backend
 class TestOllamaSecEv4LIAIntegration:
     """End-to-end tests for SecEv4LIA with Ollama backend."""
 
@@ -256,91 +255,3 @@ class TestOllamaSecEv4LIAIntegration:
 
         assert results is not None
         logger.info(f"Advprefix attack completed: {results}")
-
-
-@pytest.mark.integration
-@pytest.mark.ollama
-@pytest.mark.secev4lia_backend
-class TestOllamaRouterIntegration:
-    """Integration tests for AgentRouter with Ollama."""
-
-    def test_router_creates_ollama_adapter(
-        self,
-        skip_if_ollama_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        ollama_base_url: str,
-        ollama_model: str,
-    ):
-        """Test that AgentRouter correctly creates OllamaAgent adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.server.storage.remote import RemoteBackend
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-        from secev4lia.router.adapters.ollama import OllamaAgent
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        backend = RemoteBackend(client)
-
-        router = AgentRouter(
-            backend=backend,
-            name=ollama_model,
-            agent_type=AgentTypeEnum.OLLAMA,
-            endpoint=ollama_base_url,
-        )
-
-        # Verify adapter was created
-        agent_id = str(router.backend_agent.id)
-        adapter = router.get_agent_instance(registration_key=agent_id)
-
-        assert isinstance(adapter, OllamaAgent)
-        logger.info(f"Router created Ollama adapter: {adapter.id}")
-
-    def test_router_handles_ollama_request(
-        self,
-        skip_if_ollama_unavailable,
-        skip_if_no_secev4lia_key,
-        secev4lia_api_base_url: str,
-        secev4lia_api_key: str,
-        ollama_base_url: str,
-        ollama_model: str,
-    ):
-        """Test that router can handle requests through Ollama adapter."""
-        from secev4lia.server.client import AuthenticatedClient
-        from secev4lia.server.storage.remote import RemoteBackend
-        from secev4lia.router.router import AgentRouter
-        from secev4lia.router.types import AgentTypeEnum
-
-        client = AuthenticatedClient(
-            base_url=secev4lia_api_base_url,
-            token=secev4lia_api_key,
-            prefix="Bearer",
-        )
-        backend = RemoteBackend(client)
-
-        router = AgentRouter(
-            backend=backend,
-            name=ollama_model,
-            agent_type=AgentTypeEnum.OLLAMA,
-            endpoint=ollama_base_url,
-        )
-
-        # Route a request
-        agent_id = str(router.backend_agent.id)
-        request_data = {
-            "prompt": "Say hello!",
-            "max_tokens": 20,
-        }
-
-        response = router.route_request(
-            registration_key=agent_id, request_data=request_data
-        )
-
-        assert response is not None
-        assert "processed_response" in response
-        logger.info(f"Router Ollama response: {response['processed_response'][:50]}")

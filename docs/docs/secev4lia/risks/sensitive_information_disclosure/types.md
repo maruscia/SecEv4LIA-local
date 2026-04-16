@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.sensitive_information_disclosure.types
 ---
 
-Sensitive Information Disclosure sub-types.
+Sensitive Information Disclosure risk patterns.
 
 ## SensitiveInformationDisclosureType Objects
 
@@ -11,7 +11,7 @@ Sensitive Information Disclosure sub-types.
 class SensitiveInformationDisclosureType(Enum)
 ```
 
-Sub-types for Sensitive Information Disclosure.
+risk patterns for Sensitive Information Disclosure.
 
 #### TRAINING\_DATA\_EXTRACTION
 

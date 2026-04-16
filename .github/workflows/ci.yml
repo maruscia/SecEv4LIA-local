@@ -185,7 +185,6 @@ jobs:
     timeout-minutes: 30
     if: github.event_name == 'pull_request' && github.base_ref == 'main'
     env:
-      SECEV4LIA_API_KEY: ${{ secrets.SECEV4LIA_API_KEY }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       OLLAMA_MODEL: tinyllama
       TEST_MAX_TOKENS_FAST: "15"
@@ -243,7 +242,7 @@ jobs:
           retention-days: 1
 
   # ── E2E tests ─────────────────────────────────────────────────────────────
-  # Requires OPENROUTER_API_KEY (and optionally SECEV4LIA_API_KEY).
+  # Requires OPENROUTER_API_KEY.
   # Skips gracefully when secrets are absent.
   test-e2e:
     name: E2E Tests
@@ -251,7 +250,6 @@ jobs:
     timeout-minutes: 30
     if: github.event_name == 'pull_request' && github.base_ref == 'main'
     env:
-      SECEV4LIA_API_KEY: ${{ secrets.SECEV4LIA_API_KEY }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       TEST_MAX_TOKENS_FAST: "15"
       TEST_MAX_TOKENS_MEDIUM: "25"

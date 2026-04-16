@@ -195,7 +195,7 @@ def create_pydoc_config(output_dir: str, modules: list[str]) -> str:
         renderer:
           type: docusaurus
           docs_base_path: {output_dir}
-          sidebar_top_level_label: "🔗 API Reference"
+          sidebar_top_level_label: "🔗 SDK Reference"
         """
     ).strip()
 
@@ -289,7 +289,7 @@ def generate_docs(version: str) -> None:
 sidebar_position: 1
 ---
 
-# Python SDK API Reference
+# Python SDK Reference
 
 This section provides detailed documentation for all classes, methods, and functions
 in the SecEv4LIA Python SDK, auto-generated from source-code docstrings.

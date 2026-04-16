@@ -32,7 +32,7 @@ from secev4lia.attacks.shared.prompt_parser import extract_prompt_and_improvemen
 from secev4lia.attacks.shared.response_utils import extract_response_content
 from secev4lia.attacks.shared.router_factory import create_router
 from secev4lia.server.client import AuthenticatedClient
-from secev4lia.server.api.models import StepTypeEnum
+from secev4lia.server.storage.enums import StepTypeEnum
 from secev4lia.router.router import AgentRouter
 from secev4lia.router.tracking import Context, Tracker
 

@@ -8,7 +8,7 @@ import logging
 import unittest
 from unittest.mock import MagicMock
 
-from secev4lia.server.api.models import EvaluationStatusEnum, StatusEnum
+from secev4lia.server.storage.enums import EvaluationStatusEnum, StatusEnum
 from secev4lia.router.tracking.context import TrackingContext
 from secev4lia.router.tracking.step import StepTracker
 from secev4lia.router.tracking.utils import sanitize_for_json

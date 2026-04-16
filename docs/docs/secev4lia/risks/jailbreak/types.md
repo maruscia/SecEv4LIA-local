@@ -3,7 +3,7 @@ sidebar_label: types
 title: secev4lia.risks.jailbreak.types
 ---
 
-Jailbreak sub-types.
+Jailbreak risk patterns.
 
 ## JailbreakType Objects
 
@@ -11,7 +11,7 @@ Jailbreak sub-types.
 class JailbreakType(Enum)
 ```
 
-Sub-types for Jailbreak.
+risk patterns for Jailbreak.
 
 #### ROLEPLAY
 

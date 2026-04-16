@@ -46,7 +46,7 @@ import time
 from secev4lia.logger import get_logger
 from typing import Any, Callable, Dict, List, Optional
 
-from secev4lia.server.api.models import StatusEnum
+from secev4lia.server.storage.enums import StatusEnum
 
 from .context import TrackingContext
 from .step import StepTracker
@@ -119,7 +119,7 @@ class TrackingCoordinator:
         Factory method to create a fully-initialized coordinator.
 
         Args:
-            backend: StorageBackend (RemoteBackend or LocalBackend), or None to disable.
+            backend: StorageBackend, or None to disable.
             run_id: Server-side run record ID (or None to disable)
             logger: Logger instance
             attack_type: Attack identifier (e.g., "advprefix", "pair")

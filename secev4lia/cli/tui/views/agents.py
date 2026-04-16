@@ -213,7 +213,7 @@ class AgentsTab(BaseTab):
             self._show_agent_details()
 
     def refresh_data(self) -> None:
-        """Refresh agents data from backend (local or remote)."""
+        """Refresh agents data from the local backend."""
         try:
             backend = self.create_backend()
             result = backend.list_agents(page=1, page_size=200)

@@ -336,142 +336,8 @@
           "items": [
             {
               "items": [
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/agent/agent_create",
-                    "reference/secev4lia/server/api/agent/agent_destroy",
-                    "reference/secev4lia/server/api/agent/agent_list",
-                    "reference/secev4lia/server/api/agent/agent_partial_update",
-                    "reference/secev4lia/server/api/agent/agent_retrieve",
-                    "reference/secev4lia/server/api/agent/agent_update"
-                  ],
-                  "label": "secev4lia.server.api.agent",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/apilogs/apilogs_list",
-                    "reference/secev4lia/server/api/apilogs/apilogs_retrieve",
-                    "reference/secev4lia/server/api/apilogs/apilogs_summary_retrieve"
-                  ],
-                  "label": "secev4lia.server.api.apilogs",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/attack/attack_create",
-                    "reference/secev4lia/server/api/attack/attack_destroy",
-                    "reference/secev4lia/server/api/attack/attack_list",
-                    "reference/secev4lia/server/api/attack/attack_partial_update",
-                    "reference/secev4lia/server/api/attack/attack_retrieve",
-                    "reference/secev4lia/server/api/attack/attack_update"
-                  ],
-                  "label": "secev4lia.server.api.attack",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/checkout/checkout_create"
-                  ],
-                  "label": "secev4lia.server.api.checkout",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/generate/v1_chat_completions_create"
-                  ],
-                  "label": "secev4lia.server.api.generate",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/judge/judge_create"
-                  ],
-                  "label": "secev4lia.server.api.judge",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/key/key_context_retrieve",
-                    "reference/secev4lia/server/api/key/key_create",
-                    "reference/secev4lia/server/api/key/key_destroy",
-                    "reference/secev4lia/server/api/key/key_list",
-                    "reference/secev4lia/server/api/key/key_retrieve"
-                  ],
-                  "label": "secev4lia.server.api.key",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/organization/organization_create",
-                    "reference/secev4lia/server/api/organization/organization_destroy",
-                    "reference/secev4lia/server/api/organization/organization_list",
-                    "reference/secev4lia/server/api/organization/organization_me_retrieve",
-                    "reference/secev4lia/server/api/organization/organization_partial_update",
-                    "reference/secev4lia/server/api/organization/organization_retrieve",
-                    "reference/secev4lia/server/api/organization/organization_update"
-                  ],
-                  "label": "secev4lia.server.api.organization",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/result/result_create",
-                    "reference/secev4lia/server/api/result/result_destroy",
-                    "reference/secev4lia/server/api/result/result_list",
-                    "reference/secev4lia/server/api/result/result_partial_update",
-                    "reference/secev4lia/server/api/result/result_retrieve",
-                    "reference/secev4lia/server/api/result/result_trace_create",
-                    "reference/secev4lia/server/api/result/result_update"
-                  ],
-                  "label": "secev4lia.server.api.result",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/run/run_create",
-                    "reference/secev4lia/server/api/run/run_destroy",
-                    "reference/secev4lia/server/api/run/run_list",
-                    "reference/secev4lia/server/api/run/run_partial_update",
-                    "reference/secev4lia/server/api/run/run_result_create",
-                    "reference/secev4lia/server/api/run/run_retrieve",
-                    "reference/secev4lia/server/api/run/run_run_tests_create",
-                    "reference/secev4lia/server/api/run/run_update"
-                  ],
-                  "label": "secev4lia.server.api.run",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/scripts/generate"
-                  ],
-                  "label": "secev4lia.server.api.scripts",
-                  "type": "category"
-                },
-                {
-                  "items": [
-                    "reference/secev4lia/server/api/user/user_create",
-                    "reference/secev4lia/server/api/user/user_destroy",
-                    "reference/secev4lia/server/api/user/user_list",
-                    "reference/secev4lia/server/api/user/user_me_retrieve",
-                    "reference/secev4lia/server/api/user/user_me_update",
-                    "reference/secev4lia/server/api/user/user_partial_update",
-                    "reference/secev4lia/server/api/user/user_retrieve",
-                    "reference/secev4lia/server/api/user/user_update"
-                  ],
-                  "label": "secev4lia.server.api.user",
-                  "type": "category"
-                },
-                "reference/secev4lia/server/api/models"
-              ],
-              "label": "secev4lia.server.api",
-              "type": "category"
-            },
-            {
-              "items": [
                 "reference/secev4lia/server/storage/base",
-                "reference/secev4lia/server/storage/local",
-                "reference/secev4lia/server/storage/remote"
+                "reference/secev4lia/server/storage/local"
               ],
               "label": "secev4lia.server.storage",
               "type": "category"
@@ -491,6 +357,6 @@
       "type": "category"
     }
   ],
-  "label": "\ud83d\udd17 API Reference",
+  "label": "\ud83d\udd17 SDK Reference",
   "type": "category"
 }

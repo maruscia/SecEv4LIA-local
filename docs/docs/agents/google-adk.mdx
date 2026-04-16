@@ -63,20 +63,6 @@ agent = SecEv4LIA(
 )
 ```
 
-To use **remote mode** (cloud dashboard), provide an API key:
-
-```python
-import os
-from secev4lia import SecEv4LIA, AgentTypeEnum
-
-agent = SecEv4LIA(
-    name="multi_tool_agent",
-    endpoint="http://localhost:8000",
-    agent_type=AgentTypeEnum.GOOGLE_ADK,
-    api_key=os.getenv("SECEV4LIA_API_KEY"),          # optional
-)
-```
-
 ### ADK-Specific Configuration
 
 The SDK automatically handles ADK-specific features:
@@ -132,7 +118,6 @@ def test_adk_security():
         name="multi_tool_agent",
         endpoint=os.getenv("AGENT_URL"),
         agent_type=AgentTypeEnum.GOOGLE_ADK,
-        # Optionally add api_key= and base_url= for remote mode
     )
 
     # Configure comprehensive security test
@@ -216,12 +201,8 @@ agent = SecEv4LIA(
 # Agent endpoint
 export AGENT_URL="http://localhost:8001"
 
-# Optional: enable remote mode with an API key
-export SECEV4LIA_API_KEY="your-api-key"        # omit for local mode
 export OLLAMA_BASE_URL="http://localhost:11434"
 ```
-
-**Note:** `SECEV4LIA_API_KEY` is optional. Without it, SecEv4LIA runs in local mode and stores all results in `~/.local/share/secev4lia/secev4lia.db`. If you need remote mode, pass `api_key` directly to `SecEv4LIA()`.
 
 ### ADK Session Management
 

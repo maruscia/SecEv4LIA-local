@@ -10,13 +10,6 @@ PAIR (Prompt Automatic Iterative Refinement) is an LLM-driven attack technique t
 
 Unlike static attacks, PAIR treats jailbreaking as a **conversation** between an attacker LLM and the target. The attacker learns from each failed attempt, adapting its strategy to find successful jailbreaks—often in fewer than 20 queries.
 
-### Key Features
-
-- **Adaptive Learning**: Improves prompts based on target feedback
-- **Black-Box Friendly**: No knowledge of target internals required
-- **Efficient**: Often succeeds in fewer than 20 iterations
-- **Research-Backed**: Based on peer-reviewed academic work
-
 ### Research Foundation
 
 PAIR is based on the paper:

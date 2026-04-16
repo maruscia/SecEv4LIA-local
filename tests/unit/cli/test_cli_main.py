@@ -105,10 +105,9 @@ class TestCLIDoctor(unittest.TestCase):
     """Test the doctor command."""
 
     @patch("secev4lia.cli.main.CLIConfig")
-    def test_doctor_no_api_key(self, mock_config_class):
-        """Test doctor when no API key is configured."""
+    def test_doctor_without_config_file(self, mock_config_class):
+        """Test doctor when no local config file is present."""
         mock_config = MagicMock()
-        mock_config.api_key = None
         mock_config.default_config_path = MagicMock()
         mock_config.default_config_path.exists.return_value = False
         mock_config_class.return_value = mock_config
@@ -119,25 +118,17 @@ class TestCLIDoctor(unittest.TestCase):
         self.assertIn("SecEv4LIA CLI Diagnostics", result.output)
 
     @patch("secev4lia.cli.main.CLIConfig")
-    def test_doctor_with_api_key(self, mock_config_class):
-        """Test doctor when API key is configured."""
+    def test_doctor_with_config_file(self, mock_config_class):
+        """Test doctor when local config file is present."""
         mock_config = MagicMock()
-        mock_config.api_key = "a-very-long-api-key-that-is-valid"
-        mock_config.base_url = ""
         mock_config.default_config_path = MagicMock()
         mock_config.default_config_path.exists.return_value = True
         mock_config_class.return_value = mock_config
 
-        # Mock the API call
-        with patch("secev4lia.cli.main.agent_list", create=True) as mock_agent:
-            mock_response = MagicMock()
-            mock_response.status_code = 200
-            mock_agent.sync_detailed.return_value = mock_response
-
-            runner = CliRunner()
-            result = runner.invoke(cli, ["doctor"])
-            self.assertEqual(result.exit_code, 0)
-            self.assertIn("SecEv4LIA CLI Diagnostics", result.output)
+        runner = CliRunner()
+        result = runner.invoke(cli, ["doctor"])
+        self.assertEqual(result.exit_code, 0)
+        self.assertIn("SecEv4LIA CLI Diagnostics", result.output)
 
 
 class TestCLINoCommand(unittest.TestCase):
